@@ -54,11 +54,14 @@ public class MainActivity extends AppCompatActivity {
         handler.post(new Runnable(){
             @Override
             public void run(){
-                int hours = seconds/3600;
-                int minutes = (seconds%3600)/60;
-                int secs = seconds%60;
+                int mili = seconds%100*10;
+                int secs = seconds/100;
+                int minutes = secs/60;
+                int hours = minutes/3600;
 
-                String time = String.format("%02d:%02d:%02d", hours, minutes, secs);
+
+
+                String time = String.format("%d:%02d:%02d:%03d", hours, minutes, secs, mili);
 
                 timeView.setText(time);
 
@@ -66,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                     seconds++;
                 }
 
-                handler.postDelayed(this, 100);
+                handler.postDelayed(this, 1);
             }
         });
         }

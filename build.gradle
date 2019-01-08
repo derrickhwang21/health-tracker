@@ -21,6 +21,7 @@ allprojects {
         jcenter()
     }
 }
+compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'
 
 task clean(type: Delete) {
     delete rootProject.buildDir
