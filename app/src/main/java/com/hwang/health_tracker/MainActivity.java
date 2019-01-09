@@ -89,9 +89,15 @@ public class MainActivity extends AppCompatActivity {
             startRun = false;
         }
 
+        public void onClickReset(View view){
+            startRun = false;
+            seconds = 0;
+    }
 
 
-        public void Timer(){
+
+
+    public void Timer(){
         final TextView timeView = (TextView)findViewById(R.id.time_view);
         final Handler handler = new Handler();
         handler.post(new Runnable(){
@@ -104,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                String time = String.format("%d:%02d:%02d:%03d", hours, minutes, secs, mili);
+                String time = String.format("%d:%02d:%02d.%03d", hours, minutes, secs, mili);
 
                 timeView.setText(time);
 
