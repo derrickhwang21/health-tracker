@@ -5,26 +5,42 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
 
 public class MainActivity extends AppCompatActivity {
 
     int buttonClick = 0;
     int seconds = 0;
     boolean startRun;
-    long currentTime = 0;
+    CarouselView carouselView;
+
+    int[] imageSlide = {R.drawable.man};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        carouselView = (CarouselView) findViewById(R.id.carouselView);
+        carouselView.setPageCount(imageSlide.length);
+        carouselView.setImageListener(imageListener);
+
 
         Timer();
     }
 
-
+    ImageListener imageListener = new ImageListener() {
+        @Override
+        public void setImageForPosition(int position, ImageView imageView) {
+            imageView.setImageResource(imageSlide[position]);
+        }
+    };
 
         public void onButtonClick(View v){
             buttonClick = buttonClick + 1;
