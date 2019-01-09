@@ -1,28 +1,71 @@
 package com.hwang.health_tracker;
 
 import android.os.Handler;
+import android.sax.TextElementListener;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
     int buttonClick = 0;
+
     int seconds = 0;
     boolean startRun;
-    long currentTime = 0;
+
+    CarouselView carouselView;
+    CarouselView carouselLabel;
+
+    int[] imageSlide = {R.drawable.man, R.drawable.man2, R.drawable.man3};
+    int[] imageTitle = {R.drawable.label1, R.drawable.label2, R.drawable.label3};
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        carouselView = (CarouselView) findViewById(R.id.carouselView);
+        carouselLabel = (CarouselView) findViewById(R.id.carouselLabel);
+        carouselView.setPageCount(imageSlide.length);
+        carouselView.setImageListener(imageListener);
+        carouselLabel.setPageCount(imageTitle.length);
+        carouselLabel.setImageListener(imageListenerLabel);
+
 
         Timer();
     }
+
+
+
+    ImageListener imageListener = new ImageListener() {
+        @Override
+        public void setImageForPosition(int position, ImageView imageView) {
+
+            Log.d("position", "" + position +carouselLabel + imageTitle);
+            imageView.setImageResource(imageSlide[position]);
+        }
+    };
+
+    ImageListener imageListenerLabel = new ImageListener() {
+        @Override
+        public void setImageForPosition(int position, ImageView imageView) {
+
+            Log.d("position", "" + position +carouselLabel + imageTitle);
+            imageView.setImageResource(imageTitle[position]);
+        }
+    };
 
 
 
@@ -46,9 +89,15 @@ public class MainActivity extends AppCompatActivity {
             startRun = false;
         }
 
+        public void onClickReset(View view){
+            startRun = false;
+            seconds = 0;
+    }
 
 
-        public void Timer(){
+
+
+    public void Timer(){
         final TextView timeView = (TextView)findViewById(R.id.time_view);
         final Handler handler = new Handler();
         handler.post(new Runnable(){
@@ -61,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                String time = String.format("%d:%02d:%02d:%03d", hours, minutes, secs, mili);
+                String time = String.format("%d:%02d:%02d.%03d", hours, minutes, secs, mili);
 
                 timeView.setText(time);
 
