@@ -1,12 +1,11 @@
 package com.hwang.health_tracker;
 
 import android.os.Handler;
-import android.sax.TextElementListener;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,7 +13,7 @@ import android.widget.Toast;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
-import org.w3c.dom.Text;
+
 
 public class MainActivity extends AppCompatActivity {
 
