@@ -1,11 +1,24 @@
 package com.hwang.health_tracker;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 
+import android.os.SystemClock;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,18 +30,13 @@ import com.synnapps.carouselview.ImageListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    int buttonClick = 0;
 
-    int seconds = 0;
-    boolean startRun;
 
     CarouselView carouselView;
     CarouselView carouselLabel;
 
     int[] imageSlide = {R.drawable.man, R.drawable.man2, R.drawable.man3};
     int[] imageTitle = {R.drawable.label1, R.drawable.label2, R.drawable.label3};
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +50,48 @@ public class MainActivity extends AppCompatActivity {
         carouselLabel.setPageCount(imageTitle.length);
         carouselLabel.setImageListener(imageListenerLabel);
 
-
-        Timer();
     }
 
 
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu){
+//        getMenuInflater().inflate(R.menu.main, menu);
+//        return true;
+//    }
+
+
+    public void onClickNotification(View v){
+            scheduleNotification(getNotification("Drink some water"), 5000);
+    }
+
+
+
+
+    private void scheduleNotification(Notification notification, int delay){
+
+        Intent notificationIntent = new Intent(this, NotificationPublisher.class);
+        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
+        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        long futureInMillis = SystemClock.elapsedRealtime() + delay;
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
+    }
+
+    private Notification getNotification(String content){
+        Notification.Builder builder = new Notification.Builder(this);
+        builder.setContentTitle("Scheduled Notification");
+        builder.setContentText(content);
+        builder.setSmallIcon(R.drawable.notification_icon);
+        return builder.build();
+
+    }
+
+    public void clickWorkout(View view){
+        Intent intent = new Intent(this, DisplayWorkout.class);
+        startActivity(intent);
+    }
 
     ImageListener imageListener = new ImageListener() {
         @Override
@@ -68,57 +113,5 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        public void onButtonClick(View v){
-            buttonClick = buttonClick + 1;
-            if(buttonClick == 1){
-                Toast.makeText(getApplicationContext(), "Button Clicked first time", Toast.LENGTH_LONG).show();
-            }
-            else
-            {
-                Toast.makeText(getApplicationContext(), "Button clicked count is" + buttonClick, Toast.LENGTH_LONG).show();
-            }
 
-        }
-
-        public void onClickStart(View view){
-            startRun = true;
-        }
-
-        public void onClickStop(View view){
-            startRun = false;
-        }
-
-        public void onClickReset(View view){
-            startRun = false;
-            seconds = 0;
-    }
-
-
-
-
-    public void Timer(){
-        final TextView timeView = (TextView)findViewById(R.id.time_view);
-        final Handler handler = new Handler();
-        handler.post(new Runnable(){
-            @Override
-            public void run(){
-                int mili = seconds%100*10;
-                int secs = seconds/100;
-                int minutes = secs/60;
-                int hours = minutes/3600;
-
-
-
-                String time = String.format("%d:%02d:%02d.%03d", hours, minutes, secs, mili);
-
-                timeView.setText(time);
-
-                if(startRun){
-                    seconds++;
-                }
-
-                handler.postDelayed(this, 1);
-            }
-        });
-        }
 }
