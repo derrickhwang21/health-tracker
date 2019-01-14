@@ -10,32 +10,15 @@
         android:id="@+id/carouselView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_marginStart="8dp"
+        app:disableAutoPlayOnUserInteraction="true"
         app:fillColor="#FFFFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
         app:pageColor="#00000000"
         app:radius="6dp"
-        app:slideInterval="6000"
         app:strokeColor="#FF777777"
         app:strokeWidth="1dp"
-        app:indicatorGravity="bottom">
-
-
-    </com.synnapps.carouselview.CarouselView>
-
-    <com.synnapps.carouselview.CarouselView
-        android:id="@+id/carouselLabel"
-        android:layout_width="180dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/carouselView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="48dp"
-        android:fontFamily="sans-serif-light"
-        android:gravity="left"
-        app:fillColor="#FFFFFFFF"
-        app:pageColor="#00000000"
-        app:radius="6dp"
-        app:slideInterval="6000"
-        app:strokeColor="#FF777777"
-        app:strokeWidth="1dp"/>
+        tools:layout_editor_absoluteY="4dp" />
 
 
     <TextView
@@ -43,12 +26,11 @@
         android:layout_width="392dp"
         android:layout_height="92dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:textColor="@android:color/black"
         android:textSize="68sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/carouselView"
@@ -66,7 +48,7 @@
         android:onClick="onButtonClick"
         android:text="Start Excercise"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintHorizontal_bias="0.392"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toBottomOf="@+id/time_view" />
 
@@ -76,47 +58,50 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/time_view"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="56dp"
         android:layout_toRightOf="@+id/time_view"
         android:onClick="onClickStart"
         android:text="Start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_stop"
-        app:layout_constraintHorizontal_bias="0.875"
+        app:layout_constraintHorizontal_bias="0.687"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/btn_stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/time_view"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="56dp"
         android:layout_toRightOf="@+id/time_view"
         android:onClick="onClickStop"
         android:text="Stop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_reset"
         app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/btn_reset"
         android:layout_width="80dp"
         android:layout_height="38dp"
         android:layout_below="@+id/time_view"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="8dp"
         android:layout_toRightOf="@+id/time_view"
         android:onClick="onClickReset"
         android:text="Reset"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintVertical_bias="0.342" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
