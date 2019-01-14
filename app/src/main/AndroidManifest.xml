@@ -2,9 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hwang.health_tracker">
 
-    <uses-sdk
-        android:minSdkVersion="17"
-        android:targetSdkVersion="17" />
 
     <application
         android:allowBackup="true"
@@ -27,6 +24,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        <activity android:name=".ExcerciseActivityLog" />
+
         <receiver android:name=".NotificationPublisher" />
 
     </application>

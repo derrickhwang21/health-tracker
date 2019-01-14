@@ -115,6 +115,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void clickExcerciseLog(View view){
+        Intent intent = new Intent(this, ExcerciseActivityLog.class);
+        startActivity(intent);
+    }
+
 
         ViewListener viewListener = new ViewListener() {
         @Override
