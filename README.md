@@ -32,6 +32,22 @@ The app should display a `(1/N)`, `(2/N)` indicator so users know how many items
 
 ![sc-carousel](screenshots/screenshot3.png)
 
+#### Navigation
+
+Clear up the homepage and allow users to visit individual pages for those various features.
+
+Move Finger Exercises and Stopwatch into their own pages. Add button on the homepage to link to those pages, and ensure that the user can use the back button on the device to return to the app homepage. 
+
+![sc-new-activity](screenshots/screenshot-new-activity.png)
+
+#### Health Notifications
+
+Create a new activity for Notifications
+
+Allow users to set up reminders to drink water, which should appear every 2 hours in the notification (For testing, length is shorten to 5, 10, or 30 seconds in the menu) 
+
+![sc-notification](screenshots/screenshot-notification.png)
+
 ## Changelog
 
 01/08/2019
@@ -47,3 +63,14 @@ The app should display a `(1/N)`, `(2/N)` indicator so users know how many items
 * Added in reset button for counter
 * Began unit testing
 * added in readme
+
+01/10/2019
+* changed carousel 
+* created new activity
+* started notification
+
+
+01/11/2019
+* Finished notification
+* cleaned up styling
+* updated readme
