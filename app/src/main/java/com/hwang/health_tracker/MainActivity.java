@@ -14,9 +14,8 @@ import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.Gravity;
+
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,8 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.synnapps.carouselview.CarouselView;
-import com.synnapps.carouselview.ImageListener;
-
+import com.synnapps.carouselview.ViewListener;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -33,10 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     CarouselView carouselView;
-    CarouselView carouselLabel;
 
     int[] imageSlide = {R.drawable.man, R.drawable.man2, R.drawable.man3};
-    int[] imageTitle = {R.drawable.label1, R.drawable.label2, R.drawable.label3};
+    String[] imageTitle = {"You", "Got", "This"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +41,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         carouselView = (CarouselView) findViewById(R.id.carouselView);
-        carouselLabel = (CarouselView) findViewById(R.id.carouselLabel);
+
         carouselView.setPageCount(imageSlide.length);
-        carouselView.setImageListener(imageListener);
-        carouselLabel.setPageCount(imageTitle.length);
-        carouselLabel.setImageListener(imageListenerLabel);
+        carouselView.setSlideInterval(4000);
+
+        carouselView.setViewListener(viewListener);
+
 
     }
 
@@ -93,23 +91,27 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    ImageListener imageListener = new ImageListener() {
-        @Override
-        public void setImageForPosition(int position, ImageView imageView) {
 
-            Log.d("position", "" + position +carouselLabel + imageTitle);
-            imageView.setImageResource(imageSlide[position]);
+        ViewListener viewListener = new ViewListener() {
+        @Override
+        public View setViewForPosition(int position) {
+
+            View sliderView = getLayoutInflater().inflate(R.layout.view_custom, null);
+
+            TextView carouselLabel = (TextView) sliderView.findViewById(R.id.labelTextView);
+            ImageView carouselSlide = (ImageView) sliderView.findViewById(R.id.slideImageView);
+
+            carouselSlide.setImageResource(imageSlide[position]);
+            carouselLabel.setText(imageTitle[position]);
+
+            carouselView.setIndicatorGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP);
+
+            return sliderView;
+
+
         }
     };
 
-    ImageListener imageListenerLabel = new ImageListener() {
-        @Override
-        public void setImageForPosition(int position, ImageView imageView) {
-
-            Log.d("position", "" + position +carouselLabel + imageTitle);
-            imageView.setImageResource(imageTitle[position]);
-        }
-    };
 
 
 
