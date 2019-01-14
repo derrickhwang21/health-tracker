@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
+
+
 
     <com.synnapps.carouselview.CarouselView
         android:id="@+id/carouselView"
@@ -21,6 +26,7 @@
         tools:layout_editor_absoluteY="4dp" />
 
 
+<<<<<<< HEAD
     <TextView
         android:id="@+id/time_view"
         android:layout_width="392dp"
@@ -38,24 +44,32 @@
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintTop_creator="1" />
 
+=======
+>>>>>>> 827b85a4051a9eeb4bf27ce1940291e21c630247
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_workout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="168dp"
         android:layout_marginEnd="8dp"
-        android:onClick="onButtonClick"
-        android:text="Start Excercise"
+        android:onClick="clickWorkout"
+        android:text="Go to Workout"
         app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
         app:layout_constraintHorizontal_bias="0.392"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toBottomOf="@+id/time_view" />
+=======
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carouselView" />
+>>>>>>> 827b85a4051a9eeb4bf27ce1940291e21c630247
 
     <Button
-        android:id="@+id/btn_start"
+        android:id="@+id/btn_notification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:layout_below="@+id/time_view"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -102,6 +116,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button"
         app:layout_constraintVertical_bias="0.342" />
+=======
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="onClickNotification"
+        android:text="Notify"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_workout"
+        app:layout_constraintVertical_bias="1.0" />
+
+
+
+
+>>>>>>> 827b85a4051a9eeb4bf27ce1940291e21c630247
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
@@ -131,4 +160,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.052083332" />
 
+
 </android.support.constraint.ConstraintLayout>
+
