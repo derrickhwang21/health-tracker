@@ -8,6 +8,7 @@ import java.util.List;
 
 @Dao
 public interface ExcerciseDao {
+
     @Query("SELECT * FROM exercise")
     List<Exercise> getAll();
 
@@ -15,5 +16,5 @@ public interface ExcerciseDao {
     Exercise getById(long id);
 
     @Insert
-    long add(Exercise exercise);
+    void add(Exercise exercise);
 }

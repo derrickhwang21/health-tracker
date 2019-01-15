@@ -5,8 +5,10 @@ import android.arch.persistence.room.PrimaryKey;
 
 @Entity
 public class Exercise {
-    @PrimaryKey
+
+    @PrimaryKey(autoGenerate = true)
     public int id;
+
     public String title;
     public int sets;
     public int reps;

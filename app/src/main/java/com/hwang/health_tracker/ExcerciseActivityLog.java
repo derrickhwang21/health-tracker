@@ -23,21 +23,33 @@ public class ExcerciseActivityLog extends AppCompatActivity {
     protected void onCreate(Bundle savedState){
         super.onCreate(savedState);
         setContentView(R.layout.activity_exercise_log);
-        database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "exercise").allowMainThreadQueries().build();
+        database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "exercise").fallbackToDestructiveMigration().allowMainThreadQueries().build();
 
-        if(database.excerciseDao().getById(0) == null){
-            Date currentTime = Calendar.getInstance().getTime();
-            for(int i = 0; i < exerciseNameList.length; i++) {
-                database.excerciseDao().add(new Exercise(exerciseNameList[i], 3, 10, "burpees all day!", currentTime.toString()));
-            }
-        }
+
+        Date currentTime = Calendar.getInstance().getTime();
+        database.excerciseDao().add(new Exercise(exerciseNameList[1], 3, 10, "burpees all day!", currentTime.toString()));
+        database.excerciseDao().add(new Exercise(exerciseNameList[2], 3, 10, "burpees all day!", currentTime.toString()));
+        database.excerciseDao().add(new Exercise(exerciseNameList[3], 3, 10, "burpees all day!", currentTime.toString()));
+        database.excerciseDao().add(new Exercise(exerciseNameList[4], 3, 10, "burpees all day!", currentTime.toString()));
+
+//        if(database.excerciseDao().getAll().isEmpty()){
+//            Date currentTime = Calendar.getInstance().getTime();
+//            for(int i = 0; i < nameArray1.length; i++) {
+
+
+
+//            }
+//        }
 
 //        TextView textView = findViewById(R.id.excerciseLog);
 
 
         List<Exercise> exercises = database.excerciseDao().getAll();
         nameArray1 = new String[exercises.size()];
+        int sizeOfExercises = exercises.size();
 
+
+        Log.d(getClass().getName(), "Size: " + sizeOfExercises);
         for (int i = 0; i < exercises.size(); i++){
             String name = exercises.get(i).title;
             Log.d(name, "onCreate: ");
@@ -45,9 +57,6 @@ public class ExcerciseActivityLog extends AppCompatActivity {
         }
 
 //        String[] nameArray = exercises.get(i).title.toArray(new String[exercises.size()]);
-
-
-
 
         listView = (ListView) findViewById(R.id.excerciseListView);
 
