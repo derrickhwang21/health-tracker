@@ -3,6 +3,7 @@ package com.hwang.health_tracker;
 import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -10,6 +11,8 @@ import java.util.Date;
 
 public class ExcerciseActivityLog extends AppCompatActivity {
     AppDatabase database;
+    ListView listView;
+    String exerciseNameList[] = {"India", "China", "australia", "Portugle", "America", "NewZealand"};
 
     @Override
     protected void onCreate(Bundle savedState){
@@ -24,6 +27,12 @@ public class ExcerciseActivityLog extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.excerciseLog);
         Exercise exercise = database.excerciseDao().getById(0);
-        textView.setText(exercise.title);
+
+        listView = (ListView) findViewById(R.id.excerciseListView);
+
+        CustomAdapter customAdapter = new CustomAdapter(getApplicationContext(), exerciseNameList);
+        listView.setAdapter(customAdapter);
+
+        textView.setText(exercise.toString());
     }
 }

@@ -9,4 +9,13 @@
         android:layout_height="125dp"
         android:layout_weight="1"
         android:text="TextView" />
+
+    <!--source: https://abhiandroid.com/ui/listview-->
+    <ListView
+        android:id="@+id/excerciseListView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/material_blue_grey_800"
+        android:dividerHeight="1dp"
+        android:footerDividersEnabled="false" />
 </LinearLayout>

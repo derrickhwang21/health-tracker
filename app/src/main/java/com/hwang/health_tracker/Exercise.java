@@ -20,4 +20,8 @@ public class Exercise {
         this.description = description;
         this.timestamp = timestamp;
     }
+
+    public String toString(){
+        return "Exercise name: " + title + " Sets: " + sets + " Reps: " + reps + " Description: " + description + " Time: " + timestamp;
+    }
 }
