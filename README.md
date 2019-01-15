@@ -74,3 +74,13 @@ Allow users to set up reminders to drink water, which should appear every 2 hour
 * Finished notification
 * cleaned up styling
 * updated readme
+
+01/11/2019
+* added in database
+
+01/13/2019
+* added in list view
+
+
+#### Credits:
+https://abhiandroid.com/ui/listview
