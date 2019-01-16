@@ -28,4 +28,6 @@ public class Exercise {
     public String toString(){
         return "Exercise name: " + title + " Sets: " + sets + " Reps: " + reps + " Description: " + description + " Time: " + timestamp;
     }
+
+
 }

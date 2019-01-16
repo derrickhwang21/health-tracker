@@ -3,6 +3,7 @@ package com.hwang.health_tracker;
 import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ListView;
 
 import java.util.Calendar;
@@ -16,25 +17,32 @@ public class ExcerciseActivityLog extends AppCompatActivity {
     int setList[] = {1, 2};
     int repList[] = {10, 12};
     String descriptionList[] = {"All day", "You got this"};
+    String currentTime[] = {"Now", "Now"};
+
     String[] nameArray;
     int[] setArray;
     int[] repArray;
     String[] descriptionArray;
     String[] timesArray;
 
-
+    String TAG = "log test string";
     @Override
     protected void onCreate(Bundle savedState){
         super.onCreate(savedState);
+
         setContentView(R.layout.activity_exercise_log);
         database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "exercise").fallbackToDestructiveMigration().allowMainThreadQueries().build();
 
         if(database.excerciseDao().getAll().isEmpty()){
             for(int i = 0; i < exerciseNameList.length; i++) {
-                Date currentTime = Calendar.getInstance().getTime();
-                database.excerciseDao().add(new Exercise(exerciseNameList[i], setList[i], repList[i], descriptionList[i], currentTime.toString()));
+//                Date currentTime = Calendar.getInstance().getTime();
+//                database.excerciseDao().add(new Exercise(exerciseNameList[i], 2, 2, descriptionList[i], currentTime.toString()));
+                database.excerciseDao().add(new Exercise(exerciseNameList[i], setList[i], repList[i], descriptionList[i], currentTime[i]));
+                Log.d(TAG, "Line 41: ");
             }
         }
+        Log.d(TAG, "Line 44: ");
+
         // grabbing list data from room to array
         List<Exercise> exercises = database.excerciseDao().getAll();
         nameArray = new String[exercises.size()];

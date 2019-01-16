@@ -51,8 +51,8 @@ public class CustomAdapter extends BaseAdapter {
         TextView exerciseDescriptions = (TextView) view.findViewById(R.id.textViewDescription);
         TextView exerciseTimes = (TextView) view.findViewById(R.id.textViewTime);
         exerciseName.setText(exerciseNameList[i]);
-        exerciseSets.setText(exerciseSetList[i]);
-        exerciseReps.setText(exerciseRepsList[i]);
+        exerciseSets.setText(Integer.toString(exerciseSetList[i]));
+        exerciseReps.setText(Integer.toString(exerciseRepsList[i]));
         exerciseDescriptions.setText(exerciseDescriptionList[i]);
         exerciseTimes.setText(exerciseTimeList[i]);
         return view;
