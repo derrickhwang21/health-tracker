@@ -5,8 +5,10 @@ import android.arch.persistence.room.PrimaryKey;
 
 @Entity
 public class Exercise {
-    @PrimaryKey
+
+    @PrimaryKey(autoGenerate = true)
     public int id;
+
     public String title;
     public int sets;
     public int reps;
@@ -21,9 +23,11 @@ public class Exercise {
         this.timestamp = timestamp;
     }
 
-    public Exercise(){}
+//    public Exercise(){}
 
     public String toString(){
         return "Exercise name: " + title + " Sets: " + sets + " Reps: " + reps + " Description: " + description + " Time: " + timestamp;
     }
+
+
 }
