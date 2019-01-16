@@ -10,11 +10,13 @@ import android.widget.TextView;
 public class CustomAdapter extends BaseAdapter {
     Context context;
     String exerciseNameList[];
+    int exerciseSetList[];
     LayoutInflater layInflater;
 
-    public CustomAdapter(Context applicationContext, String[] exerciseNameList){
+    public CustomAdapter(Context applicationContext, String[] exerciseNameList, int[] exerciseSetList){
         this.context = applicationContext;
         this.exerciseNameList = exerciseNameList;
+        this.exerciseSetList = exerciseSetList;
         layInflater = (LayoutInflater.from(applicationContext));
     }
 
@@ -36,8 +38,10 @@ public class CustomAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup){
         view = layInflater.inflate(R.layout.activity_exercise_list_view, null);
-        TextView exerciseName = (TextView) view.findViewById(R.id.textView);
+        TextView exerciseName = (TextView) view.findViewById(R.id.textViewName);
+        TextView exerciseSets = (TextView) view.findViewById(R.id.textViewSets);
         exerciseName.setText(exerciseNameList[i]);
+        exerciseSets.setText(exerciseSetList[i]);
         return view;
     }
 }

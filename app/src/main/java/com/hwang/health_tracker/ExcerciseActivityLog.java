@@ -16,7 +16,12 @@ public class ExcerciseActivityLog extends AppCompatActivity {
     AppDatabase database;
     ListView listView;
     String exerciseNameList[] = {"India", "China", "australia", "Portugle", "America", "NewZealand"};
+    int setList[] = {1,2,3,4,5,6};
     String[] nameArray1;
+    int[] setArray;
+//    Integer[] setsArray;
+
+
 
 
     @Override
@@ -26,41 +31,38 @@ public class ExcerciseActivityLog extends AppCompatActivity {
         database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "exercise").fallbackToDestructiveMigration().allowMainThreadQueries().build();
 
 
-        Date currentTime = Calendar.getInstance().getTime();
-        database.excerciseDao().add(new Exercise(exerciseNameList[1], 3, 10, "burpees all day!", currentTime.toString()));
-        database.excerciseDao().add(new Exercise(exerciseNameList[2], 3, 10, "burpees all day!", currentTime.toString()));
-        database.excerciseDao().add(new Exercise(exerciseNameList[3], 3, 10, "burpees all day!", currentTime.toString()));
-        database.excerciseDao().add(new Exercise(exerciseNameList[4], 3, 10, "burpees all day!", currentTime.toString()));
+        if(database.excerciseDao().getAll().isEmpty()){
 
-//        if(database.excerciseDao().getAll().isEmpty()){
-//            Date currentTime = Calendar.getInstance().getTime();
-//            for(int i = 0; i < nameArray1.length; i++) {
+            for(int i = 0; i < exerciseNameList.length; i++) {
+                Date currentTime = Calendar.getInstance().getTime();
+                database.excerciseDao().add(new Exercise(exerciseNameList[i], setArray[i], 10, "burpees all day!", currentTime.toString()));
 
+            }
+        }
 
 
-//            }
-//        }
-
-//        TextView textView = findViewById(R.id.excerciseLog);
 
 
         List<Exercise> exercises = database.excerciseDao().getAll();
         nameArray1 = new String[exercises.size()];
-        int sizeOfExercises = exercises.size();
+        setArray = new int[exercises.size()];
 
 
-        Log.d(getClass().getName(), "Size: " + sizeOfExercises);
+
+
         for (int i = 0; i < exercises.size(); i++){
             String name = exercises.get(i).title;
-            Log.d(name, "onCreate: ");
+            int sets = exercises.get(i).sets;
+
             nameArray1[i] = name;
+            setArray[i] = sets;
         }
 
 //        String[] nameArray = exercises.get(i).title.toArray(new String[exercises.size()]);
 
         listView = (ListView) findViewById(R.id.excerciseListView);
 
-        CustomAdapter customAdapter = new CustomAdapter(getApplicationContext(), nameArray1);
+        CustomAdapter customAdapter = new CustomAdapter(getApplicationContext(), nameArray1, setArray);
         listView.setAdapter(customAdapter);
 
     }

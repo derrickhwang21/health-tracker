@@ -6,12 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".exerciseListView">
 
+
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="fill_parent"
-        android:layout_height="16dp"
-        android:layout_gravity="center"
-        tools:layout_editor_absoluteY="3dp" />
+        android:id="@+id/textViewName"
+        android:layout_width="112dp"
+        android:layout_height="121dp"
+        android:textAlignment="textStart"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/textViewSets"
+        android:layout_width="129dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toEndOf="@+id/textViewName"
+        tools:layout_editor_absoluteY="0dp" />
+
+
+    <TextView
+        android:id="@+id/textViewReps"
+        android:layout_width="142dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toEndOf="@+id/textViewSets"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewDescription"
+        android:layout_width="263dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/textViewName"
+        app:layout_constraintTop_toBottomOf="@+id/textViewReps" />
 
 
 </android.support.constraint.ConstraintLayout>
