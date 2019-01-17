@@ -83,4 +83,8 @@ Allow users to set up reminders to drink water, which should appear every 2 hour
 
 
 #### Credits:
-https://abhiandroid.com/ui/listview
+Notification credit: https://gist.github.com/BrandonSmith/6679223
+
+Listview credit: https://abhiandroid.com/ui/listview
+
+Passing string into an int dao parameter: Michelle Ferreirae and https://stackoverflow.com/questions/4903515/how-do-i-return-an-int-from-edittext-android
