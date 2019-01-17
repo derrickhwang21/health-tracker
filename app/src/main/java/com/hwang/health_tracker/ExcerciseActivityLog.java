@@ -58,17 +58,28 @@ public class ExcerciseActivityLog extends AppCompatActivity {
 
         public void createExercise(View v) {
 
+        // grabds text from edittext view
         EditText UserInputExerciseName = findViewById(R.id.exercise_name);
         EditText userInputExerciseSets = findViewById(R.id.exercise_sets);
         EditText userInputExerciseReps = findViewById(R.id.exercise_reps);
         EditText userInputExerciseDescription = findViewById(R.id.exercise_description);
 
+        // create Exercise object
         Exercise userInputExerciseObject = new Exercise(UserInputExerciseName.getText().toString(), Integer.parseInt(userInputExerciseSets.getText().toString()), Integer.parseInt(userInputExerciseReps.getText().toString()), userInputExerciseDescription.getText().toString(), currentTime.toString());
+
+        // add new exercise object to database
         database.excerciseDao().add(userInputExerciseObject);
 
-            ArrayAdapter<Exercise> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, database.excerciseDao().getAll());
-            ListView listView = (ListView) findViewById(R.id.excerciseListView);
-            listView.setAdapter(adapter);
+        // clear edit field text
+        UserInputExerciseName.setText("");
+        userInputExerciseSets.setText("");
+        userInputExerciseReps.setText("");
+        userInputExerciseDescription.setText("");
+
+        // renders listview
+        ArrayAdapter<Exercise> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, database.excerciseDao().getAll());
+        ListView listView = (ListView) findViewById(R.id.excerciseListView);
+        listView.setAdapter(adapter);
 
 
         }
