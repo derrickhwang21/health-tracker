@@ -1,75 +1,88 @@
 package com.hwang.health_tracker;
 
-import android.arch.persistence.room.Room;
+import androidx.room.Room;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
+
+import static java.lang.Integer.parseInt;
 
 public class ExcerciseActivityLog extends AppCompatActivity {
     AppDatabase database;
-    ListView listView;
-    String exerciseNameList[] = {"Burpees", "Pushup"};
-    int setList[] = {1, 2};
-    int repList[] = {10, 12};
-    String descriptionList[] = {"All day", "You got this"};
-    String currentTime[] = {"Now", "Now"};
+
+
 
     String[] nameArray;
     int[] setArray;
     int[] repArray;
     String[] descriptionArray;
     String[] timesArray;
+    Date currentTime = Calendar.getInstance().getTime();
 
-    String TAG = "log test string";
+
+
     @Override
     protected void onCreate(Bundle savedState){
         super.onCreate(savedState);
 
         setContentView(R.layout.activity_exercise_log);
         database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "exercise").fallbackToDestructiveMigration().allowMainThreadQueries().build();
+        createTestExercise();
+        ArrayAdapter<Exercise> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, database.excerciseDao().getAll());
+        ListView listView = (ListView) findViewById(R.id.excerciseListView);
+        listView.setAdapter(adapter);
 
-        if(database.excerciseDao().getAll().isEmpty()){
-            for(int i = 0; i < exerciseNameList.length; i++) {
-//                Date currentTime = Calendar.getInstance().getTime();
-//                database.excerciseDao().add(new Exercise(exerciseNameList[i], 2, 2, descriptionList[i], currentTime.toString()));
-                database.excerciseDao().add(new Exercise(exerciseNameList[i], setList[i], repList[i], descriptionList[i], currentTime[i]));
-                Log.d(TAG, "Line 41: ");
-            }
-        }
-        Log.d(TAG, "Line 44: ");
 
-        // grabbing list data from room to array
-        List<Exercise> exercises = database.excerciseDao().getAll();
-        nameArray = new String[exercises.size()];
-        setArray = new int[exercises.size()];
-        repArray = new int[exercises.size()];
-        descriptionArray = new String[exercises.size()];
-        timesArray = new String[exercises.size()];
-
-        for (int i = 0; i < exercises.size(); i++){
-            String name = exercises.get(i).title;
-            int sets = exercises.get(i).sets;
-            int reps = exercises.get(i).reps;
-            String descriptions = exercises.get(i).description;
-            String times = exercises.get(i).timestamp;
-
-            nameArray[i] = name;
-            setArray[i] = sets;
-            repArray[i] = reps;
-            descriptionArray[i] = descriptions;
-            timesArray[i] = times;
-
-        }
-
-        listView = (ListView) findViewById(R.id.excerciseListView);
-
-        CustomAdapter customAdapter = new CustomAdapter(getApplicationContext(), nameArray, setArray, repArray, descriptionArray, timesArray);
-        listView.setAdapter(customAdapter);
 
     }
+
+    public void createTestExercise(){
+        // Test database population
+        if (database.excerciseDao().getAll().isEmpty()) {
+            // test data
+            database.excerciseDao().add(new Exercise("Burpees", 1, 10, "All Day!", currentTime.toString()));
+            database.excerciseDao().add(new Exercise("Pushup", 1, 10, "All Day!", currentTime.toString()));
+
+        }
+    }
+
+
+        public void createExercise(View v) {
+
+        // grabds text from edittext view
+        EditText UserInputExerciseName = findViewById(R.id.exercise_name);
+        EditText userInputExerciseSets = findViewById(R.id.exercise_sets);
+        EditText userInputExerciseReps = findViewById(R.id.exercise_reps);
+        EditText userInputExerciseDescription = findViewById(R.id.exercise_description);
+
+        // create Exercise object
+        Exercise userInputExerciseObject = new Exercise(UserInputExerciseName.getText().toString(), Integer.parseInt(userInputExerciseSets.getText().toString()), Integer.parseInt(userInputExerciseReps.getText().toString()), userInputExerciseDescription.getText().toString(), currentTime.toString());
+
+        // add new exercise object to database
+        database.excerciseDao().add(userInputExerciseObject);
+
+        // clear edit field text
+        UserInputExerciseName.setText("");
+        userInputExerciseSets.setText("");
+        userInputExerciseReps.setText("");
+        userInputExerciseDescription.setText("");
+
+        // renders listview
+        ArrayAdapter<Exercise> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, database.excerciseDao().getAll());
+        ListView listView = (ListView) findViewById(R.id.excerciseListView);
+        listView.setAdapter(adapter);
+
+
+        }
+
+
+
+
 }
