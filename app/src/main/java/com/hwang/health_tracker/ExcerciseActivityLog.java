@@ -55,23 +55,6 @@ public class ExcerciseActivityLog extends AppCompatActivity {
         }
     }
 
-//    public void createExercise(ExerciseAdapter adapter) {
-//        EditText UserInputExerciseName = findViewById(R.id.exercise_name);
-//        EditText userInputExerciseSets = findViewById(R.id.exercise_sets);
-//        EditText userInputExerciseReps = findViewById(R.id.exercise_reps);
-//        EditText userInputExerciseDescription = findViewById(R.id.exercise_description);
-//
-//        Exercise userInputExerciseObject = new Exercise(UserInputExerciseName.getText().toString(), Integer.parseInt(userInputExerciseSets.getText().toString()), Integer.parseInt(userInputExerciseReps.getText().toString()), userInputExerciseDescription.getText().toString(), currentTime.toString());
-//
-//        adapter.add(userInputExerciseObject);
-//
-//        UserInputExerciseName.setText("");
-//        userInputExerciseSets.setText("");
-//        userInputExerciseReps.setText("");
-//        userInputExerciseDescription.setText("");
-//
-//        ListView listView = (ListView) findViewById(R.id.excerciseListView);
-//        listView.setAdapter(adapter);
 
         public void createExercise(View v) {
 
@@ -81,34 +64,13 @@ public class ExcerciseActivityLog extends AppCompatActivity {
         EditText userInputExerciseDescription = findViewById(R.id.exercise_description);
 
         Exercise userInputExerciseObject = new Exercise(UserInputExerciseName.getText().toString(), Integer.parseInt(userInputExerciseSets.getText().toString()), Integer.parseInt(userInputExerciseReps.getText().toString()), userInputExerciseDescription.getText().toString(), currentTime.toString());
+        database.excerciseDao().add(userInputExerciseObject);
 
             ArrayAdapter<Exercise> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, database.excerciseDao().getAll());
             ListView listView = (ListView) findViewById(R.id.excerciseListView);
             listView.setAdapter(adapter);
 
-//        UserInputExerciseName.setText("");
-//        userInputExerciseSets.setText("");
-//        userInputExerciseReps.setText("");
-//        userInputExerciseDescription.setText("");
-//
-//        nameArray = new String[exercises.size()];
-//        setArray = new int[exercises.size()];
-//        repArray = new int[exercises.size()];
-//        descriptionArray = new String[exercises.size()];
-//        timesArray = new String[exercises.size()];
-//
-//        for (int i = 0; i < exercises.size(); i++){
-//            String name = exercises.get(i).title;
-//            int sets = exercises.get(i).sets;
-//            int reps = exercises.get(i).reps;
-//            String descriptions = exercises.get(i).description;
-//            String times = exercises.get(i).timestamp;
-//
-//            nameArray[i] = name;
-//            setArray[i] = sets;
-//            repArray[i] = reps;
-//            descriptionArray[i] = descriptions;
-//            timesArray[i] = times;
+
         }
 
 
