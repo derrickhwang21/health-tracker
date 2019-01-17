@@ -17,7 +17,7 @@ public class ExcerciseActivityLog extends AppCompatActivity {
     int setList[] = {1, 2};
     int repList[] = {10, 12};
     String descriptionList[] = {"All day", "You got this"};
-    String currentTime[] = {"Now", "Now"};
+
 
     String[] nameArray;
     int[] setArray;
@@ -35,9 +35,9 @@ public class ExcerciseActivityLog extends AppCompatActivity {
 
         if(database.excerciseDao().getAll().isEmpty()){
             for(int i = 0; i < exerciseNameList.length; i++) {
-//                Date currentTime = Calendar.getInstance().getTime();
-//                database.excerciseDao().add(new Exercise(exerciseNameList[i], 2, 2, descriptionList[i], currentTime.toString()));
-                database.excerciseDao().add(new Exercise(exerciseNameList[i], setList[i], repList[i], descriptionList[i], currentTime[i]));
+                Date currentTime = Calendar.getInstance().getTime();
+                database.excerciseDao().add(new Exercise(exerciseNameList[i], setList[i], repList[i], descriptionList[i], currentTime.toString()));
+//                database.excerciseDao().add(new Exercise(exerciseNameList[i], setList[i], repList[i], descriptionList[i], currentTime[i]));
                 Log.d(TAG, "Line 41: ");
             }
         }
