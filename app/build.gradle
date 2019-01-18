@@ -1,6 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
+    useLibrary 'android.test.runner'
+
+    useLibrary 'android.test.base'
+    useLibrary 'android.test.mock'
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.hwang.health_tracker"
@@ -8,6 +12,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -24,11 +29,15 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
     implementation 'com.synnapps:carouselview:0.1.5'
     testImplementation 'junit:junit:4.12'
+
+    androidTestImplementation 'androidx.test:core:1.0.0'
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
+    androidTestImplementation 'androidx.test:rules:1.1.0'
+
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
+    androidTestUtil 'androidx.test:orchestrator:1.1.0'
     implementation 'com.google.android.material:material:1.0.0-beta01'
 }

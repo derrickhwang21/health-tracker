@@ -17,13 +17,6 @@ import static java.lang.Integer.parseInt;
 public class ExcerciseActivityLog extends AppCompatActivity {
     AppDatabase database;
 
-
-
-    String[] nameArray;
-    int[] setArray;
-    int[] repArray;
-    String[] descriptionArray;
-    String[] timesArray;
     Date currentTime = Calendar.getInstance().getTime();
 
 
@@ -78,7 +71,6 @@ public class ExcerciseActivityLog extends AppCompatActivity {
         ArrayAdapter<Exercise> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, database.excerciseDao().getAll());
         ListView listView = (ListView) findViewById(R.id.excerciseListView);
         listView.setAdapter(adapter);
-
 
         }
 
