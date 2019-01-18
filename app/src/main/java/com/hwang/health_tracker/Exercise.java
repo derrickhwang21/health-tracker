@@ -9,6 +9,14 @@ public class Exercise {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String title;
     public int sets;
     public int reps;

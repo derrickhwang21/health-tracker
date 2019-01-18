@@ -46,7 +46,22 @@ Create a new activity for Notifications
 
 Allow users to set up reminders to drink water, which should appear every 2 hours in the notification (For testing, length is shorten to 5, 10, or 30 seconds in the menu) 
 
-![sc-notification](screenshots/screenshot-notification.png)
+#### Exercise Activity Diary
+
+##### Database Setup
+
+Set up a database to contain `Exercise` data. Each `Exercise` should have a `title`, `sets`, `reps` ,and `description`, as well as a `timestamp`. For testing, add a single Exercise to the database.
+
+##### Displaying the Exercise Diary
+
+Add a new Activity to hold the Exercise Diary. In that view, display all entries from the Exercise database in a `ListView`. (At this point, that should show a single row.) Make sure that Exercise looks reasonable.
+
+At the top of the Exercise activity log, add a form that allows a user to enter data about an exercise. When they hit submit, the information about that exercise should be stored in the database and displayed in the `ListView`. You can choose how the timestamp works: either let the user enter when they completed the exercise, or use the time when they hit submit on the form.
+
+![sc-display](screenshots/exercise-activity-log-display.png)
+![sc-form](screenshots/exercise-activity-log-form.png)
+![sc-database](screenshots/exercise-activity-log-database.png)
+
 
 ## Changelog
 
@@ -82,9 +97,24 @@ Allow users to set up reminders to drink water, which should appear every 2 hour
 * added in list view
 
 
+01/15/2019
+* added list view which renders test data from database 
+
+01/16/2019
+* added in adapter activity to render data from room dynamically to custom view
+
+01/17/2019
+* Migrated to androidX and setup instrumentation testing environment
+
+01/18/2019
+* added in instrumentation test for Exercise Activity Log and updated readme.
+
+
 #### Credits:
 Notification credit: https://gist.github.com/BrandonSmith/6679223
 
 Listview credit: https://abhiandroid.com/ui/listview
 
 Passing string into an int dao parameter: Michelle Ferreirae and https://stackoverflow.com/questions/4903515/how-do-i-return-an-int-from-edittext-android
+
+Setting up instrument testing: https://developer.android.com/training/testing/set-up-project and https://developer.android.com/training/data-storage/room/testing-db#java
