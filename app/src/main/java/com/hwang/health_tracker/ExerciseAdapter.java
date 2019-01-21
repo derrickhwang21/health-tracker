@@ -5,13 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+
 
 public class ExerciseAdapter extends ArrayAdapter<Exercise> {
     public ExerciseAdapter(Context context, ArrayList<Exercise> exercises){
@@ -29,29 +26,7 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_exercise_list_view, parent, false);
         }
 
-//        Button btButton = (Button) convertView.findViewById(R.id.button_save);
-//        btButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Date currentTime = Calendar.getInstance().getTime();
-//                EditText UserInputExerciseName = view.findViewById(R.id.exercise_name);
-//                EditText userInputExerciseSets = view.findViewById(R.id.exercise_sets);
-//                EditText userInputExerciseReps = view.findViewById(R.id.exercise_reps);
-//                EditText userInputExerciseDescription = view.findViewById(R.id.exercise_description);
-//
-//                Exercise userInputExerciseObject = new Exercise(UserInputExerciseName.getText().toString(), Integer.parseInt(userInputExerciseSets.getText().toString()), Integer.parseInt(userInputExerciseReps.getText().toString()), userInputExerciseDescription.getText().toString(), currentTime.toString());
-//
-//
-//
-//                view.set (userInputExerciseObject);
-//
-//                UserInputExerciseName.setText("");
-//                userInputExerciseSets.setText("");
-//                userInputExerciseReps.setText("");
-//                userInputExerciseDescription.setText("");
-//            }
-//        });
+
 
 
         // Lookup view for data population
