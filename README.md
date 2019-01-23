@@ -118,3 +118,7 @@ Listview credit: https://abhiandroid.com/ui/listview
 Passing string into an int dao parameter: Michelle Ferreirae and https://stackoverflow.com/questions/4903515/how-do-i-return-an-int-from-edittext-android
 
 Setting up instrument testing: https://developer.android.com/training/testing/set-up-project and https://developer.android.com/training/data-storage/room/testing-db#java
+
+Camera: https://demonuts.com/android-custom-camera/
+
+Multiple Runtime Permission: https://demonuts.com/android-runtime-permissions/

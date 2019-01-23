@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
@@ -27,6 +28,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     CarouselView carouselView;
     int[] imageSlide = {R.drawable.man, R.drawable.man2, R.drawable.man3};
     String[] imageTitle = {"You", "Got", "This"};
+    private static int RESULT_LOAD_IMAGE = 1;
 
 
     @Override
@@ -70,7 +73,19 @@ public class MainActivity extends AppCompatActivity {
 
         createNotificationChannel();
 
+      Button buttonLoadImage = (Button) findViewById(R.id.buttonLoadPicture);
+      buttonLoadImage.setOnClickListener(new View.OnClickListener() {
 
+        @Override
+        public void onClick(View arg0) {
+
+          Intent i = new Intent(
+                  Intent.ACTION_PICK,
+                  android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+          startActivityForResult(i, RESULT_LOAD_IMAGE);
+        }
+      });
     }
 
 
@@ -177,6 +192,33 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+
+    if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+      Uri selectedImage = data.getData();
+      String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+      Cursor cursor = getContentResolver().query(selectedImage,
+              filePathColumn, null, null, null);
+      cursor.moveToFirst();
+
+      int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+      String picturePath = cursor.getString(columnIndex);
+      cursor.close();
+
+      ImageView imageView = (ImageView) findViewById(R.id.imgView);
+      imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
+    }
+
+
+  }
+
+
+
 
 
 
