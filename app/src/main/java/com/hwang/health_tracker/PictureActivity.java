@@ -49,7 +49,8 @@ import java.util.Calendar;
 import java.util.List;
 
 public class PictureActivity extends AppCompatActivity {
-  private static final String TAG = "AndroidCameraApi";
+
+  private static final String TAG = "PictureActivity Tag";
   private Button takePictureButton;
   private TextureView textureView;
   private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
@@ -71,6 +72,7 @@ public class PictureActivity extends AppCompatActivity {
   private boolean mFlashSupported;
   private Handler mBackgroundHandler;
   private HandlerThread mBackgroundThread;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -87,23 +89,26 @@ public class PictureActivity extends AppCompatActivity {
       }
     });
   }
+
+  //Various instances of texture listeners.
   TextureView.SurfaceTextureListener textureListener = new TextureView.SurfaceTextureListener() {
+
+    //open your camera here
     @Override
-    public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-      //open your camera here
-      openCamera();
-    }
+    public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) { openCamera(); }
+
+    // Transform you image captured size according to the surface width and height
     @Override
-    public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-      // Transform you image captured size according to the surface width and height
-    }
+    public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {}
+
     @Override
     public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
       return false;
     }
+
     @Override
-    public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-    }
+    public void onSurfaceTextureUpdated(SurfaceTexture surface) {}
+
   };
   private final CameraDevice.StateCallback stateCallback = new CameraDevice.StateCallback() {
     @Override
@@ -123,6 +128,8 @@ public class PictureActivity extends AppCompatActivity {
       cameraDevice = null;
     }
   };
+
+  // callback listener on image capture intent
   final CameraCaptureSession.CaptureCallback captureCallbackListener = new CameraCaptureSession.CaptureCallback() {
     @Override
     public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
@@ -131,6 +138,7 @@ public class PictureActivity extends AppCompatActivity {
       createCameraPreview();
     }
   };
+
   protected void startBackgroundThread() {
     mBackgroundThread = new HandlerThread("Camera Background");
     mBackgroundThread.start();
@@ -146,6 +154,8 @@ public class PictureActivity extends AppCompatActivity {
       e.printStackTrace();
     }
   }
+
+  // capture image file and save to device.
   protected void takePicture() {
     if(null == cameraDevice) {
       Log.e(TAG, "cameraDevice is null");
@@ -261,6 +271,8 @@ public class PictureActivity extends AppCompatActivity {
       e.printStackTrace();
     }
   }
+
+  // Request Runtime Permission
   private void openCamera() {
     CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
     Log.e(TAG, "is camera open");
@@ -279,7 +291,7 @@ public class PictureActivity extends AppCompatActivity {
     } catch (CameraAccessException e) {
       e.printStackTrace();
     }
-    Log.e(TAG, "openCamera X");
+    Log.e(TAG, "openCamera");
   }
   protected void updatePreview() {
     if(null == cameraDevice) {
