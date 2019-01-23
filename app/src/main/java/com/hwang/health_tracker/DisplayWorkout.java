@@ -20,7 +20,6 @@ public class DisplayWorkout extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_workout);
 
-        Intent intent = getIntent();
 
         Timer();
     }

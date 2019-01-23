@@ -122,3 +122,7 @@ Setting up instrument testing: https://developer.android.com/training/testing/se
 Camera: https://demonuts.com/android-custom-camera/
 
 Multiple Runtime Permission: https://demonuts.com/android-runtime-permissions/
+
+Uploading Images: http://viralpatel.net/blogs/pick-image-from-galary-android-app/
+
+Camera2: https://proandroiddev.com/understanding-camera2-api-from-callbacks-part-1-5d348de65950

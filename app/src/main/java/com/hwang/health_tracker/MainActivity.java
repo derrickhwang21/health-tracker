@@ -173,25 +173,25 @@ public class MainActivity extends AppCompatActivity {
   }
 
 
-        ViewListener viewListener = new ViewListener() {
-        @Override
-        public View setViewForPosition(int position) {
+    ViewListener viewListener = new ViewListener() {
+    @Override
+    public View setViewForPosition(int position) {
 
-            View sliderView = getLayoutInflater().inflate(R.layout.view_custom, null);
+        View sliderView = getLayoutInflater().inflate(R.layout.view_custom, null);
 
-            TextView carouselLabel = (TextView) sliderView.findViewById(R.id.labelTextView);
-            ImageView carouselSlide = (ImageView) sliderView.findViewById(R.id.slideImageView);
+        TextView carouselLabel = (TextView) sliderView.findViewById(R.id.labelTextView);
+        ImageView carouselSlide = (ImageView) sliderView.findViewById(R.id.slideImageView);
 
-            carouselSlide.setImageResource(imageSlide[position]);
-            carouselLabel.setText(imageTitle[position]);
+        carouselSlide.setImageResource(imageSlide[position]);
+        carouselLabel.setText(imageTitle[position]);
 
-            carouselView.setIndicatorGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP);
+        carouselView.setIndicatorGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP);
 
-            return sliderView;
+        return sliderView;
 
 
-        }
-    };
+    }
+};
 
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
