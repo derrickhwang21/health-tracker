@@ -36,10 +36,7 @@ import static org.hamcrest.core.IsNot.not;
 public class DisplayWorkoutActivityInstrumentedTest {
 
 
-
-
-
-//    @Rule
+  //    @Rule
 //    public IntentsTestRule<DisplayWorkout> displayWorkoutActivityTestRule =
 //            new IntentsTestRule<>(DisplayWorkout.class);
   @Rule
@@ -47,46 +44,40 @@ public class DisplayWorkoutActivityInstrumentedTest {
           new ActivityTestRule<>(DisplayWorkout.class);
 
 
+  @Test
+  public void testOnCreate() {
 
-    @Test
-    public void testOnCreate() {
-//      Intent intent = new Intent();
-//      String expected = "Start Exercise";
-//      intent.putExtra("text", expected);
-//      Instrumentation.ActivityResult result =
-//              new Instrumentation.ActivityResult(Activity.RESULT_OK, intent);
-//
-//      intending(toPackage("com.hwang.health_tracker")).respondWith(result);
-
-      Intents.assertNoUnverifiedIntents();
-
-//        onView(allOf(withId(R.id.button), withText("Start Exercise")))
-//                .check(matches(isDisplayed()));
-//        onView(allOf(withId(R.id.btn_start), withText("Start")))
-//                .check(matches(isDisplayed()));
-//        onView(allOf(withId(R.id.btn_stop), withText("Stop")))
-//                .check(matches(isDisplayed()));
-//        onView(allOf(withId(R.id.btn_reset), withText("Reset")))
-//                .check(matches(isDisplayed()));
+    onView(allOf(withId(R.id.button), withText("Start Exercise")))
+            .check(matches(isDisplayed()));
+    onView(allOf(withId(R.id.btn_start), withText("Start")))
+            .check(matches(isDisplayed()));
+    onView(allOf(withId(R.id.btn_stop), withText("Stop")))
+            .check(matches(isDisplayed()));
+    onView(allOf(withId(R.id.btn_reset), withText("Reset")))
+            .check(matches(isDisplayed()));
 
 
-//        onView(withId(R.id.btn_start))
-//                .check(matches(withText("Start")));
-//        onView(withId(R.id.btn_stop))
-//                .check(matches(withText("Stop")));
-//        onView(withId(R.id.btn_reset))
-//                .check(matches(withText("Reset")));
+  }
+
+  @Test
+  public void testFingerExercise() {
+
+    //Test that things change when button is clicked
+    for (int i = 1; i < 30; i++) {
+      int buttonClick = 0;
+      onView(withId(R.id.button)).perform(click());
+      if (i == 1) {
+        onView(withText("Button Clicked first time")).
+                inRoot(withDecorView(not(displayWorkoutActivityTestRule.getActivity().getWindow().getDecorView()))).
+                check(matches(isDisplayed()));
+      }
+      if (i == 5){
+        onView(withText("Button clicked count is 5"));
+      }
+      if (i == 29){
+        onView(withText("Button clicked count is 29"));
+      }
+
     }
-//    @Test
-//    public void testFingerExercise() {
-//
-//        //Test that things change when button is clicked
-//        onView(withId(R.id.button)).perform(click());
-//
-//        onView(withText("Button Clicked first time")).
-//                        inRoot(withDecorView(not(displayWorkoutActivityTestRule.getActivity().getWindow().getDecorView()))).
-//                        check(matches(isDisplayed()));
-//            }
-//
-
+  }
 }
