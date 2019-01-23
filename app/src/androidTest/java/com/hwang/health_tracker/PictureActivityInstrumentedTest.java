@@ -38,27 +38,6 @@ public class PictureActivityInstrumentedTest {
   public ActivityTestRule<PictureActivity> pictureActivityTestRule =
           new ActivityTestRule<>(PictureActivity.class);
 
-//  @Rule
-//  public IntentsTestRule<PictureActivity> intentsRule = new IntentsTestRule<>(PictureActivity.class);
-
-//  @Test
-//  public void validateCameraScenario() {
-//    Bitmap icon = BitmapFactory.decodeResource(
-//            InstrumentationRegistry.getTargetContext().getResources(),
-//            R.mipmap.ic_launcher);
-//
-//    Intent resultData = new Intent();
-//    resultData.putExtra("data", icon);
-//    Instrumentation.ActivityResult result = new Instrumentation.ActivityResult(Activity.RESULT_OK, resultData);
-//
-//
-//
-//    onView(withId(R.id.btn_takepicture)).perform(click());
-//
-//
-//
-//  }
-
   @Test
   public void testSavedToExternalStorage(){
     onView(allOf(withId(R.id.btn_takepicture), withText("TAKE PICTURE")))
