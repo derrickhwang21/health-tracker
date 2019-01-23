@@ -1,19 +1,11 @@
 package com.hwang.health_tracker;
 
 
-import android.app.Activity;
-import android.app.Instrumentation;
-import android.content.Intent;
-
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 
-import androidx.test.espresso.intent.Intents;
-import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
@@ -21,11 +13,12 @@ import androidx.test.rule.ActivityTestRule;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.intent.Intents.intending;
-import static androidx.test.espresso.intent.matcher.IntentMatchers.isInternal;
-import static androidx.test.espresso.intent.matcher.IntentMatchers.toPackage;
 import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
+import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
+import static androidx.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isEnabled;
+import static androidx.test.espresso.matcher.ViewMatchers.isSelected;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.core.AllOf.allOf;
@@ -36,9 +29,7 @@ import static org.hamcrest.core.IsNot.not;
 public class DisplayWorkoutActivityInstrumentedTest {
 
 
-  //    @Rule
-//    public IntentsTestRule<DisplayWorkout> displayWorkoutActivityTestRule =
-//            new IntentsTestRule<>(DisplayWorkout.class);
+
   @Rule
   public ActivityTestRule<DisplayWorkout> displayWorkoutActivityTestRule =
           new ActivityTestRule<>(DisplayWorkout.class);
@@ -79,5 +70,47 @@ public class DisplayWorkoutActivityInstrumentedTest {
       }
 
     }
+  }
+
+
+
+  @Test
+  public void buttonIsEnabled() {
+    onView(withId(R.id.button)).check(matches(isEnabled()));
+    onView(withId(R.id.btn_start)).check(matches(isEnabled()));
+    onView(withId(R.id.btn_stop)).check(matches(isEnabled()));
+    onView(withId(R.id.btn_reset)).check(matches(isEnabled()));
+  }
+
+  @Test
+  public void buttonIsDisplayed() {
+    onView(withId(R.id.button)).check(matches(isDisplayed()));
+    onView(withId(R.id.btn_start)).check(matches(isDisplayed()));
+    onView(withId(R.id.btn_stop)).check(matches(isDisplayed()));
+    onView(withId(R.id.btn_reset)).check(matches(isDisplayed()));
+  }
+
+  @Test
+  public void buttonIsCompletelyDisplayed() {
+    onView(withId(R.id.button)).check(matches(isCompletelyDisplayed()));
+    onView(withId(R.id.btn_start)).check(matches(isCompletelyDisplayed()));
+    onView(withId(R.id.btn_stop)).check(matches(isCompletelyDisplayed()));
+    onView(withId(R.id.btn_reset)).check(matches(isCompletelyDisplayed()));
+  }
+
+  @Test
+  public void buttonIsNotSelectable() {
+    onView(withId(R.id.button)).check(matches(not(isSelected())));
+    onView(withId(R.id.btn_start)).check(matches(not(isSelected())));
+    onView(withId(R.id.btn_stop)).check(matches(not(isSelected())));
+    onView(withId(R.id.btn_reset)).check(matches(not(isSelected())));
+  }
+
+  @Test
+  public void buttonIsClickable() {
+    onView(withId(R.id.button)).check(matches(isClickable()));
+    onView(withId(R.id.btn_start)).check(matches(isClickable()));
+    onView(withId(R.id.btn_stop)).check(matches(isClickable()));
+    onView(withId(R.id.btn_reset)).check(matches(isClickable()));
   }
 }
