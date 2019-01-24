@@ -58,9 +58,7 @@ Add a new Activity to hold the Exercise Diary. In that view, display all entries
 
 At the top of the Exercise activity log, add a form that allows a user to enter data about an exercise. When they hit submit, the information about that exercise should be stored in the database and displayed in the `ListView`. You can choose how the timestamp works: either let the user enter when they completed the exercise, or use the time when they hit submit on the form.
 
-![sc-display](screenshots/exercise-activity-log-display.png)
-![sc-form](screenshots/exercise-activity-log-form.png)
-![sc-database](screenshots/exercise-activity-log-database.png)
+![sc-display](screenshots/exercise-activity-log-display.png)![sc-form](screenshots/exercise-activity-log-form.png)![sc-database](screenshots/exercise-activity-log-database.png)
 
 ##### Camera Functionality
 
@@ -147,4 +145,5 @@ Multiple Runtime Permission: https://demonuts.com/android-runtime-permissions/
 Uploading Images: http://viralpatel.net/blogs/pick-image-from-galary-android-app/
 
 Camera2: https://proandroiddev.com/understanding-camera2-api-from-callbacks-part-1-5d348de65950
+
 
