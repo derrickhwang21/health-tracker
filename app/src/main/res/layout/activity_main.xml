@@ -17,62 +17,63 @@
         android:layout_marginEnd="8dp"
         app:disableAutoPlayOnUserInteraction="true"
         app:fillColor="#FFFFFFFF" />
+
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/profile_section"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/carouselView"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/carouselView">
-    <ImageView
-        android:id="@+id/imgView"
-        android:layout_width="131dp"
-        android:layout_height="131dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="28dp"
-        app:layout_constraintTop_toBottomOf="@+id/carouselView"></ImageView>
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/buttonLoadPicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Load Picture"
-        app:layout_below="@+id/imgView"></Button>
+        <ImageView
+            android:id="@+id/imgView"
+            android:layout_width="131dp"
+            android:layout_height="131dp" />
 
-    <Button
-        android:id="@+id/btn_workout"
-        android:layout_width="181dp"
-        android:layout_height="50dp"
-        android:onClick="clickWorkout"
-        android:text="Go to Workout"
-        android:layout_toRightOf="@+id/buttonLoadPicture"/>
+        <Button
+            android:id="@+id/buttonLoadPicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="bottom"
+            android:text="Load Picture"/>
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:onClick="clickExcerciseLog"
-        android:text="Excercise Log"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.353"
-        app:layout_constraintStart_toEndOf="@+id/button3"
-        app:layout_constraintTop_toBottomOf="@+id/btn_workout" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:onClick="clickPictureActivity"
-        android:text="Take A Picture"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLoadPicture" />
-
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="8dp"
+            android:onClick="clickPictureActivity"
+            android:text="Take A Picture" />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/profile_section"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btn_workout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="clickWorkout"
+            android:text="Go to Workout"
+            android:gravity="center_vertical|center_horizontal"
+            />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="clickExcerciseLog"
+            android:text="Excercise Log"
+            android:layout_marginLeft="22dp"
+        android:gravity="center_vertical|center_horizontal" />
+    </LinearLayout>
+
+
 </RelativeLayout>
 
