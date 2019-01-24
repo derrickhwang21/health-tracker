@@ -62,6 +62,18 @@ At the top of the Exercise activity log, add a form that allows a user to enter 
 ![sc-form](screenshots/exercise-activity-log-form.png)
 ![sc-database](screenshots/exercise-activity-log-database.png)
 
+##### Camera Functionality
+
+Add the ability for users to enter a profile picture. Give them the option of taking a new photo with the camera and/or using images already on their phone. 
+
+Home Page Without User Profile Image           |  Camera Activity
+:-------------------------:|:-------------------------:
+![sc-picture-home](screenshots/picture-home.png)  |  ![sc-picture-activity](screenshots/picture-activity.png)
+
+User accessing external storage         |  Page With User Profile Image
+:-------------------------:|:-------------------------:
+![sc-picture-external-storage](screenshots/picture-external-storage.png)  |  ![sc-profile-image](screenshots/picture-profile-image.png)
+
 
 ## Changelog
 
@@ -110,6 +122,15 @@ At the top of the Exercise activity log, add a form that allows a user to enter 
 * added in instrumentation test for Exercise Activity Log and updated readme.
 
 
+01/22/2019
+* Finished camera and upload functionality
+
+01/23/2019
+* Fixed tests and added in additional tests
+
+01/24/2019
+* Updated Readme and added in tests
+
 #### Credits:
 Notification credit: https://gist.github.com/BrandonSmith/6679223
 
@@ -126,3 +147,4 @@ Multiple Runtime Permission: https://demonuts.com/android-runtime-permissions/
 Uploading Images: http://viralpatel.net/blogs/pick-image-from-galary-android-app/
 
 Camera2: https://proandroiddev.com/understanding-camera2-api-from-callbacks-part-1-5d348de65950
+
