@@ -60,6 +60,18 @@ At the top of the Exercise activity log, add a form that allows a user to enter 
 
 ![sc-display](screenshots/exercise-activity-log-display.png)![sc-form](screenshots/exercise-activity-log-form.png)![sc-database](screenshots/exercise-activity-log-database.png)
 
+##### Camera Functionality
+
+Add the ability for users to enter a profile picture. Give them the option of taking a new photo with the camera and/or using images already on their phone. 
+
+Home Page Without User Profile Image           |  Camera Activity
+:-------------------------:|:-------------------------:
+![sc-picture-home](screenshots/picture-home.png)  |  ![sc-picture-activity](screenshots/picture-activity.png)
+
+User accessing external storage         |  Page With User Profile Image
+:-------------------------:|:-------------------------:
+![sc-picture-external-storage](screenshots/picture-external-storage.png)  |  ![sc-profile-image](screenshots/picture-profile-image.png)
+
 
 ## Changelog
 
@@ -108,6 +120,15 @@ At the top of the Exercise activity log, add a form that allows a user to enter 
 * added in instrumentation test for Exercise Activity Log and updated readme.
 
 
+01/22/2019
+* Finished camera and upload functionality
+
+01/23/2019
+* Fixed tests and added in additional tests
+
+01/24/2019
+* Updated Readme and added in tests
+
 #### Credits:
 Notification credit: https://gist.github.com/BrandonSmith/6679223
 
@@ -115,4 +136,14 @@ Listview credit: https://abhiandroid.com/ui/listview
 
 Passing string into an int dao parameter: Michelle Ferreirae and https://stackoverflow.com/questions/4903515/how-do-i-return-an-int-from-edittext-android
 
-Setting up instrument testing: https://developer.android.com/training/testing/set-up-project and https://developer.android.com/training/data-storage/room/testing-db#java
+Setting up instrument testing: https://developer.android.com/training/testing/set-up-project and https://developer.android.com/training/data-storage/room/testing-db#java, Amy Cohen - For debugging my thread issues, Sooz Richman and Tara Johnson for help setting things up. 
+
+Camera: https://demonuts.com/android-custom-camera/
+
+Multiple Runtime Permission: https://demonuts.com/android-runtime-permissions/
+
+Uploading Images: http://viralpatel.net/blogs/pick-image-from-galary-android-app/
+
+Camera2: https://proandroiddev.com/understanding-camera2-api-from-callbacks-part-1-5d348de65950
+
+

@@ -20,9 +20,8 @@ public class DisplayWorkout extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_workout);
 
-        Intent intent = getIntent();
 
-        Timer();
+
     }
 
     public void onButtonClick(View v){
@@ -38,7 +37,9 @@ public class DisplayWorkout extends AppCompatActivity {
     }
 
     public void onClickStart(View view){
+
         startRun = true;
+        Timer();
     }
 
     public void onClickStop(View view){

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,69 +16,64 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         app:disableAutoPlayOnUserInteraction="true"
-        app:fillColor="#FFFFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:pageColor="#00000000"
-        app:radius="6dp"
-        app:strokeColor="#FF777777"
-        app:strokeWidth="1dp" />
+        app:fillColor="#FFFFFFFF" />
 
-
-    <Button
-        android:id="@+id/btn_workout"
-        android:layout_width="136dp"
+    <LinearLayout
+        android:id="@+id/profile_section"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
-        android:onClick="clickWorkout"
-        android:text="Go to Workout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carouselView" />
+        android:layout_below="@+id/carouselView"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imgView"
+            android:layout_width="131dp"
+            android:layout_height="131dp" />
+
+        <Button
+            android:id="@+id/buttonLoadPicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="bottom"
+            android:text="Load Picture"/>
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="8dp"
+            android:onClick="clickPictureActivity"
+            android:text="Take A Picture" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/profile_section"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btn_workout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="clickWorkout"
+            android:text="Go to Workout"
+            android:gravity="center_vertical|center_horizontal"
+            />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="clickExcerciseLog"
+            android:text="Exercise Log"
+            android:layout_marginLeft="22dp"
+        android:gravity="center_vertical|center_horizontal" />
+    </LinearLayout>
 
 
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="-9dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.0" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.052083332" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:onClick="clickExcerciseLog"
-        android:text="Excercise Log"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_workout"
-        app:layout_constraintVertical_bias="0.113" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
 
