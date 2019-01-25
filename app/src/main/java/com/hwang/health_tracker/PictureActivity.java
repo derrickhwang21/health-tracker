@@ -178,12 +178,15 @@ public class PictureActivity extends AppCompatActivity {
       List<Surface> outputSurfaces = new ArrayList<Surface>(2);
       outputSurfaces.add(reader.getSurface());
       outputSurfaces.add(new Surface(textureView.getSurfaceTexture()));
+
       final CaptureRequest.Builder captureBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
       captureBuilder.addTarget(reader.getSurface());
       captureBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
+
       // Orientation
       int rotation = getWindowManager().getDefaultDisplay().getRotation();
       captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation));
+
       final File file = new File(Environment.getExternalStorageDirectory()+"/pic.jpg");
       ImageReader.OnImageAvailableListener readerListener = new ImageReader.OnImageAvailableListener() {
         @Override
