@@ -9,14 +9,31 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static java.lang.Integer.parseInt;
 
 public class ExcerciseActivityLog extends AppCompatActivity {
     AppDatabase database;
-
+    ArrayAdapter<Exercise> adapter;
     Date currentTime = Calendar.getInstance().getTime();
 
 
@@ -28,7 +45,7 @@ public class ExcerciseActivityLog extends AppCompatActivity {
         setContentView(R.layout.activity_exercise_log);
         database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "exercise").fallbackToDestructiveMigration().allowMainThreadQueries().build();
         createTestExercise();
-        ArrayAdapter<Exercise> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, database.excerciseDao().getAll());
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, database.excerciseDao().getAll());
         ListView listView = (ListView) findViewById(R.id.excerciseListView);
         listView.setAdapter(adapter);
 
@@ -59,6 +76,7 @@ public class ExcerciseActivityLog extends AppCompatActivity {
         Exercise userInputExerciseObject = new Exercise(UserInputExerciseName.getText().toString(), Integer.parseInt(userInputExerciseSets.getText().toString()), Integer.parseInt(userInputExerciseReps.getText().toString()), userInputExerciseDescription.getText().toString(), currentTime.toString());
 
         // add new exercise object to database
+        sendToServer(userInputExerciseObject.title, Integer.toString(userInputExerciseObject.sets), Integer.toString(userInputExerciseObject.reps), userInputExerciseObject.description, userInputExerciseObject.timestamp);
         database.excerciseDao().add(userInputExerciseObject);
 
         // clear edit field text
@@ -68,13 +86,84 @@ public class ExcerciseActivityLog extends AppCompatActivity {
         userInputExerciseDescription.setText("");
 
         // renders listview
-        ArrayAdapter<Exercise> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, database.excerciseDao().getAll());
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, database.excerciseDao().getAll());
         ListView listView = (ListView) findViewById(R.id.excerciseListView);
         listView.setAdapter(adapter);
 
         }
 
+    private void getAllExerciseObjects() {
 
+      adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, database.excerciseDao().getAll());
+
+
+        com.android.volley.RequestQueue queue = Volley.newRequestQueue(this);
+        String url =" https://young-temple-12802.herokuapp.com/exercises";
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        List<Exercise> exercises = new ArrayList<>();
+                        for (int i = 0; i < response.length(); i ++) {
+                            try {
+                                Exercise exerciseObject = new Exercise();
+                                JSONObject jsonExercise =  response.getJSONObject(i);
+                              exerciseObject.title = jsonExercise.getString("title");
+                              exerciseObject.sets = jsonExercise.getInt("sets");
+                              exerciseObject.reps = jsonExercise.getInt("reps");
+                              exerciseObject.description = jsonExercise.getString("description");
+                              exerciseObject.timestamp = jsonExercise.getString("timestamp");
+                                exercises.add(exerciseObject);
+                            } catch (JSONException error) {
+                                error.printStackTrace();
+                            }
+                        }
+                        adapter.addAll(exercises);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+
+        queue.add(jsonArrayRequest);
+        ListView listView = (ListView) findViewById(R.id.excerciseListView);
+        listView.setAdapter(adapter);
+    }
+
+    private void sendToServer(final String title, final String sets, final String reps, final String description, final String timestamp) {
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url ="https://young-temple-12802.herokuapp.com/exercises";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        getAllExerciseObjects();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        }){
+          @Override
+          protected Map<String, String> getParams()
+          {
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("title", title);
+            params.put("sets", sets);
+            params.put("reps", reps);
+            params.put("description", description);
+            params.put("timestamp", timestamp);
+            return params;
+          }
+        };
+
+        queue.add(stringRequest);
+
+    }
 
 
 }
