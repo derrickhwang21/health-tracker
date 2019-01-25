@@ -35,6 +35,7 @@ public class ExcerciseActivityLog extends AppCompatActivity {
     AppDatabase database;
     ArrayAdapter<Exercise> adapter;
     Date currentTime = Calendar.getInstance().getTime();
+    ListView listView;
 
 
 
@@ -45,11 +46,8 @@ public class ExcerciseActivityLog extends AppCompatActivity {
         setContentView(R.layout.activity_exercise_log);
         database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "exercise").fallbackToDestructiveMigration().allowMainThreadQueries().build();
         createTestExercise();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, database.excerciseDao().getAll());
-        ListView listView = (ListView) findViewById(R.id.excerciseListView);
-        listView.setAdapter(adapter);
-
-
+        listView = findViewById(R.id.excerciseListView);
+        getAllExerciseObjects();
 
     }
 
@@ -87,15 +85,12 @@ public class ExcerciseActivityLog extends AppCompatActivity {
 
         // renders listview
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, database.excerciseDao().getAll());
-        ListView listView = (ListView) findViewById(R.id.excerciseListView);
         listView.setAdapter(adapter);
-
         }
 
     private void getAllExerciseObjects() {
 
       adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, database.excerciseDao().getAll());
-
 
         com.android.volley.RequestQueue queue = Volley.newRequestQueue(this);
         String url =" https://young-temple-12802.herokuapp.com/exercises";
@@ -126,9 +121,7 @@ public class ExcerciseActivityLog extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
             }
         });
-
         queue.add(jsonArrayRequest);
-        ListView listView = (ListView) findViewById(R.id.excerciseListView);
         listView.setAdapter(adapter);
     }
 
@@ -160,9 +153,7 @@ public class ExcerciseActivityLog extends AppCompatActivity {
             return params;
           }
         };
-
         queue.add(stringRequest);
-
     }
 
 

@@ -77,6 +77,17 @@ User accessing external storage         |  Page With User Profile Image
 ![sc-picture-external-storage](screenshots/picture-external-storage.png)  |  ![sc-profile-image](screenshots/picture-profile-image.png)
 
 
+
+##### Display Exercises from the server
+When a user opens the Exercise Diary page, the app should make a request to the server to retrieve all the Exercises in the server’s database. It should display both those Exercises and the ones that are local to the device within the Diary page.
+
+##### Post Exercises to the server
+When a user creates a new Exercise locally on their device, in addition to saving it to the local database, the app should POST it to the server.
+
+Display of Exercises from the server         |  User Input|  Post Exercises to the server
+:-------------------------:|:-------------------------: | :--------------------------------:
+![sc-web-before](screenshots/web-request-before.png)  |  ![sc-web-during](screenshots/web-request-during.png) | ![sc-web-fter](screenshots/web-request-after.png)
+
 ## Changelog
 
 01/08/2019
@@ -133,7 +144,10 @@ User accessing external storage         |  Page With User Profile Image
 01/24/2019
 * Updated Readme and added in tests
 
-#### Credits:
+01/25/2019
+* Updated Readme, finished Volley Put and Get methods to server
+
+#### Credits/Sources:
 Notification credit: https://gist.github.com/BrandonSmith/6679223
 
 Listview credit: https://abhiandroid.com/ui/listview
@@ -149,5 +163,12 @@ Multiple Runtime Permission: https://demonuts.com/android-runtime-permissions/
 Uploading Images: http://viralpatel.net/blogs/pick-image-from-galary-android-app/
 
 Camera2: https://proandroiddev.com/understanding-camera2-api-from-callbacks-part-1-5d348de65950
+
+Volley Sources: https://developer.android.com/training/volley/simple, 
+
+Post Request(@Hasan A Yousef): https://stackoverflow.com/questions/33573803/how-to-send-a-post-request-using-volley-with-string-body
+
+Get Request-JSON Array: https://android--examples.blogspot.com/2017/02/android-volley-json-array-request.html
+
 
 
