@@ -1,6 +1,8 @@
 package com.hwang.health_tracker;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,9 +21,7 @@ public class DisplayWorkout extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_workout);
-
-
-
+        showUsername();
     }
 
     public void onButtonClick(View v){
@@ -33,11 +33,11 @@ public class DisplayWorkout extends AppCompatActivity {
         {
             Toast.makeText(getApplicationContext(), "Button clicked count is" + buttonClick, Toast.LENGTH_LONG).show();
         }
+        updateCounter(buttonClick);
 
     }
 
     public void onClickStart(View view){
-
         startRun = true;
         Timer();
     }
@@ -51,9 +51,6 @@ public class DisplayWorkout extends AppCompatActivity {
         seconds = 0;
     }
 
-
-
-
     public void Timer(){
         final TextView timeView = (TextView)findViewById(R.id.time_view);
         final Handler handler = new Handler();
@@ -64,13 +61,8 @@ public class DisplayWorkout extends AppCompatActivity {
                 int secs = seconds/100;
                 int minutes = secs/60;
                 int hours = minutes/3600;
-
-
-
                 String time = String.format("%d:%02d:%02d.%03d", hours, minutes, secs, mili);
-
                 timeView.setText(time);
-
                 if(startRun){
                     seconds++;
                 }
@@ -79,4 +71,24 @@ public class DisplayWorkout extends AppCompatActivity {
             }
         });
     }
+
+    // Increment finger counter for shared preference
+    public void updateCounter(int counter) {
+        Context context = this;
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                getString(R.string.counter), Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(getString(R.string.counter), counter);
+        editor.commit();
+    }
+// show shared preference for username
+  public void showUsername() {
+    Context context = this;
+    SharedPreferences sharedPref = context.getSharedPreferences(
+            getString(R.string.username), Context.MODE_PRIVATE);
+    String username = sharedPref.getString(getString(R.string.username), "Enter Username on homepage");
+    TextView userData = findViewById(R.id.username);
+    userData.setText("Hello, " + username);
+  }
 }

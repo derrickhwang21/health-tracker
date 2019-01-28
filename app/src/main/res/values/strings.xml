@@ -13,4 +13,13 @@
     <string name="hint_reps">How Many Reps?</string>
     <string name="hint_description">Write Description</string>
     <string name="save">Save</string>
+    <string name="username">username</string>
+    <string name="username_input">username</string>
+    <string name="username_save">Save Username</string>
+    <string name="visited">Times visited:</string>
+    <string name="counter">Finger Count:</string>
+
+
+
+
 </resources>

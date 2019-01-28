@@ -4,6 +4,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.room.Room;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -46,8 +49,8 @@ public class ExcerciseActivityLog extends AppCompatActivity {
   FusedLocationProviderClient mFusedLocationClient;
   private final int PERMISSION_ID = 0;
   Location lastLocation;
-  private String latitude;
-  private String longitude;
+  protected String latitude;
+  protected String longitude;
 
 
 
@@ -57,6 +60,7 @@ public class ExcerciseActivityLog extends AppCompatActivity {
 
         setContentView(R.layout.activity_exercise_log);
         database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "exercise").fallbackToDestructiveMigration().allowMainThreadQueries().build();
+        showUsername();
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         getUserLocation();
         createTestExercise();
@@ -74,7 +78,6 @@ public class ExcerciseActivityLog extends AppCompatActivity {
 
         }
     }
-
 
         public void createExercise(View v) {
 
@@ -106,6 +109,8 @@ public class ExcerciseActivityLog extends AppCompatActivity {
         listView.setAdapter(adapter);
         }
 
+
+   //retrieve request from server database
     private void getAllExerciseObjects() {
 
       adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, database.excerciseDao().getAll());
@@ -145,6 +150,7 @@ public class ExcerciseActivityLog extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
+    // request to server database
     private void sendToServer(final String title, final String sets, final String reps, final String description, final String timestamp, final String longitude, final String latitude) {
 
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -178,7 +184,7 @@ public class ExcerciseActivityLog extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
-  // Gets the users location
+  // get the users location
   public void getUserLocation() {
     if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
       ActivityCompat.requestPermissions(this,
@@ -201,6 +207,7 @@ public class ExcerciseActivityLog extends AppCompatActivity {
     }
   }
 
+  // location permission request
   @Override
   public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
     switch (requestCode) {
@@ -218,5 +225,14 @@ public class ExcerciseActivityLog extends AppCompatActivity {
     }
   }
 
+// show shared preference for username
+  public void showUsername() {
+    Context context = this;
+    SharedPreferences sharedPref = context.getSharedPreferences(
+            getString(R.string.username), Context.MODE_PRIVATE);
+    String username = sharedPref.getString(getString(R.string.username), "Enter Username on homepage");
+    TextView userData = findViewById(R.id.username);
+    userData.setText("Hello, " + username);
+  }
 
 }
