@@ -88,6 +88,31 @@ Display of Exercises from the server         |  User Input|  Post Exercises to t
 :-------------------------:|:-------------------------: | :--------------------------------:
 ![sc-web-before](screenshots/web-request-before.png)  |  ![sc-web-during](screenshots/web-request-during.png) | ![sc-web-fter](screenshots/web-request-after.png)
 
+
+##### Display Exercises from the server
+Remove all hardcoded strings from your UI, and instead use the strings.xml file. (Finally make all of those warnings go away!) You should continue using strings.xml for all future additions to your app, as well.
+
+
+##### Location
+When a user adds an exercise, they should be able to include their current location. Update your models appropriately, and display the location within the ListView.
+
+User Input         |  Exercise log with location
+:-------------------------:|:-------------------------: | :--------------------------------:
+![sc-location](screenshots/sc-location.png)  | ![sc-location-after](screenshots/sc-location2.png)
+
+
+##### Shared Preferences
+
+Ensure that the user’s username is correctly displayed throughout the app. Also, modify the homepage to include some key stats, such as the current finger exercise count and the total number of times the user has visited the homepage.
+
+Homepage         |  User Input|  Updated Username
+:-------------------------:|:-------------------------: | :--------------------------------:
+![sc-sharedpref](screenshots/sc-sharedpref1.png)  |  ![sc-sharedpref1](screenshots/sc-sharedpref2.png) | ![sc-sharedpref2](screenshots/sc-sharedpref3.png)
+
+Show shared pref         |  Shared Pref Update
+:-------------------------:|:-------------------------: | :--------------------------------:
+![sc-sharedpref4](screenshots/sc-sharedpref4.png)  | ![sc-sharedpref5](screenshots/sc-sharedpref5.png)
+
 ## Changelog
 
 01/08/2019
@@ -147,6 +172,9 @@ Display of Exercises from the server         |  User Input|  Post Exercises to t
 01/25/2019
 * Updated Readme, finished Volley Put and Get methods to server
 
+01/26/2019 && 01/27/2019
+* Updated Readme, finished location, string.xml, shared preferences
+
 #### Credits/Sources:
 Notification credit: https://gist.github.com/BrandonSmith/6679223
 
@@ -169,6 +197,12 @@ Volley Sources: https://developer.android.com/training/volley/simple,
 Post Request(@Hasan A Yousef): https://stackoverflow.com/questions/33573803/how-to-send-a-post-request-using-volley-with-string-body
 
 Get Request-JSON Array: https://android--examples.blogspot.com/2017/02/android-volley-json-array-request.html
+
+Shared Preferences: https://www.journaldev.com/9412/android-shared-preferences-example-tutorial
+
+Location: https://www.tutorialspoint.com/android/android_location_based_services.html
+
+Location: https://www.protechtraining.com/blog/post/tutorial-android-location-service-example-198 
 
 
 

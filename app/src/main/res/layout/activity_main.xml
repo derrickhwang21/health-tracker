@@ -19,10 +19,78 @@
         app:fillColor="#FFFFFFFF" />
 
     <LinearLayout
-        android:id="@+id/profile_section"
+        android:id="@+id/username_section"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/carouselView"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginLeft="40dp"/>
+
+        <TextView
+            android:id="@+id/visited"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/visited"
+            android:layout_marginLeft="40dp"/>
+
+        <TextView
+            android:id="@+id/homepageVisitCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:id="@+id/counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/counter"
+            android:layout_marginLeft="40dp"/>
+
+        <TextView
+            android:id="@+id/fingerExerciseCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"/>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/username_input_section"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/username_section"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal">
+    <Button
+        android:id="@+id/saveUsernameButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="saveUsername"
+        android:text="@string/username_save"
+        />
+
+    <EditText
+        android:id="@+id/usernameInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/username_input"
+        android:inputType="textPersonName" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/profile_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/username_input_section"
         android:layout_alignParentStart="true"
         android:orientation="horizontal">
 
@@ -31,13 +99,14 @@
             android:layout_width="131dp"
             android:layout_height="131dp" />
 
+
         <Button
             android:id="@+id/buttonLoadPicture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_gravity="bottom"
-            android:text="Load Picture"/>
+            android:text="@string/load_picture"/>
 
         <Button
             android:id="@+id/button3"
@@ -46,7 +115,7 @@
             android:layout_gravity="bottom"
             android:layout_marginLeft="8dp"
             android:onClick="clickPictureActivity"
-            android:text="Take A Picture" />
+            android:text="@string/take_picture" />
     </LinearLayout>
 
     <LinearLayout
@@ -55,12 +124,14 @@
         android:layout_below="@+id/profile_section"
         android:gravity="center">
 
+
+
         <Button
             android:id="@+id/btn_workout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="clickWorkout"
-            android:text="Go to Workout"
+            android:text="@string/to_workout"
             android:gravity="center_vertical|center_horizontal"
             />
 
@@ -69,7 +140,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="clickExcerciseLog"
-            android:text="Exercise Log"
+            android:text="@string/to_log"
             android:layout_marginLeft="22dp"
         android:gravity="center_vertical|center_horizontal" />
     </LinearLayout>

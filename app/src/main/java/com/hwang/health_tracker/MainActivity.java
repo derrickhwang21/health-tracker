@@ -7,6 +7,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 
@@ -24,6 +25,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.synnapps.carouselview.CarouselView;
@@ -48,8 +50,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        carouselView = (CarouselView) findViewById(R.id.carouselView);
+        showUsername();
+        homepageVisitCounter();
+        loadCounter();
+      carouselView = (CarouselView) findViewById(R.id.carouselView);
         carouselView.setPageCount(imageSlide.length);
 
         carouselView.setSlideInterval(4000);
@@ -72,16 +76,12 @@ public class MainActivity extends AppCompatActivity {
       });
     }
 
-
-
-
 // credit: https://gist.github.com/BrandonSmith/6679223
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-
 
 // credit: https://gist.github.com/BrandonSmith/6679223
     @Override
@@ -141,42 +141,38 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void clickWorkout(View view){
-        Intent intent = new Intent(this, DisplayWorkout.class);
-        startActivity(intent);
-    }
-
-    public void clickExcerciseLog(View view){
-        Intent intent = new Intent(this, ExcerciseActivityLog.class);
-        startActivity(intent);
-    }
-
+// intent to workout
+  public void clickWorkout(View view){
+      Intent intent = new Intent(this, DisplayWorkout.class);
+      startActivity(intent);
+  }
+// intent to log
+  public void clickExcerciseLog(View view){
+      Intent intent = new Intent(this, ExcerciseActivityLog.class);
+      startActivity(intent);
+  }
+// intent to take picture
   public void clickPictureActivity(View view){
     Intent intent = new Intent(this, PictureActivity.class);
     startActivity(intent);
   }
 
-
+// Custom Image Carousel
     ViewListener viewListener = new ViewListener() {
     @Override
     public View setViewForPosition(int position) {
-
         View sliderView = getLayoutInflater().inflate(R.layout.view_custom, null);
-
         TextView carouselLabel = (TextView) sliderView.findViewById(R.id.labelTextView);
         ImageView carouselSlide = (ImageView) sliderView.findViewById(R.id.slideImageView);
-
         carouselSlide.setImageResource(imageSlide[position]);
         carouselLabel.setText(imageTitle[position]);
-
         carouselView.setIndicatorGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP);
 
         return sliderView;
-
-
     }
 };
 
+// picture runtime permission
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
@@ -197,12 +193,60 @@ public class MainActivity extends AppCompatActivity {
       imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
 
     }
-
-
   }
 
+  // Save username
+  public void saveUsername(View v) {
+    EditText usernameText = findViewById(R.id.usernameInput);
+    String username = usernameText.getText().toString();
+    Context context = this;
+    SharedPreferences sharedPref = context.getSharedPreferences(
+            getString(R.string.username), Context.MODE_PRIVATE);
+    SharedPreferences.Editor editor = sharedPref.edit();
+    editor.putString(getString(R.string.username), username);
+    editor.commit();
 
+    TextView userData = findViewById(R.id.username);
+    userData.setText("Hi, " + username);
+    usernameText.setText("");
+  }
 
+  // Shows username
+  public void showUsername() {
+    Context context = this;
+    SharedPreferences sharedPref = context.getSharedPreferences(
+            getString(R.string.username), Context.MODE_PRIVATE);
+    String username = sharedPref.getString(getString(R.string.username), "Enter Username");
+    TextView userData = findViewById(R.id.username);
+    userData.setText("Hello, " + username);
+  }
+
+  // Tracks and show homepage visits
+  public void homepageVisitCounter() {
+    Context context = this;
+    SharedPreferences sharedPref = context.getSharedPreferences(
+            getString(R.string.visited), Context.MODE_PRIVATE);
+    int visited = sharedPref.getInt(getString(R.string.visited), 0);
+    visited++;
+
+    SharedPreferences.Editor editor = sharedPref.edit();
+    editor.putInt(getString(R.string.visited), visited);
+    editor.commit();
+
+    TextView visitedField = findViewById(R.id.homepageVisitCounter);
+    visitedField.setText(String.valueOf(visited));
+  }
+
+  // show finger counter
+  public void loadCounter() {
+    Context context = this;
+    SharedPreferences sharedPref = context.getSharedPreferences(
+            getString(R.string.counter), Context.MODE_PRIVATE);
+    int counter = sharedPref.getInt(getString(R.string.counter), 0);
+
+    TextView fingerExerciseField = findViewById(R.id.fingerExerciseCounter);
+    fingerExerciseField .setText(String.valueOf(counter));
+  }
 
 
 

@@ -22,6 +22,8 @@ public class Exercise {
     public int reps;
     public String description;
     public String timestamp;
+    public double latitude;
+    public double longitude;
 
     public Exercise(String title, int sets, int reps, String description, String timestamp){
         this.title = title;
@@ -34,7 +36,7 @@ public class Exercise {
     public Exercise(){}
 
     public String toString(){
-        return "Exercise name: " + title + " Sets: " + sets + " Reps: " + reps + " Description: " + description + " Time: " + timestamp;
+        return "Exercise name: " + title + " Sets: " + sets + " Reps: " + reps + " Description: " + description + " Time: " + timestamp + "Lat:" + latitude + "Long: " + longitude;
     }
 
 
