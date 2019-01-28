@@ -1,9 +1,15 @@
 package com.hwang.health_tracker;
 
+import androidx.core.app.ActivityCompat;
 import androidx.room.Room;
+
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -16,6 +22,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,10 +39,15 @@ import java.util.Map;
 
 
 public class ExcerciseActivityLog extends AppCompatActivity {
-    AppDatabase database;
-    ArrayAdapter<Exercise> adapter;
-    Date currentTime = Calendar.getInstance().getTime();
-    ListView listView;
+  AppDatabase database;
+  ArrayAdapter<Exercise> adapter;
+  Date currentTime = Calendar.getInstance().getTime();
+  ListView listView;
+  FusedLocationProviderClient mFusedLocationClient;
+  private final int PERMISSION_ID = 0;
+  Location lastLocation;
+  private String latitude;
+  private String longitude;
 
 
 
@@ -43,6 +57,8 @@ public class ExcerciseActivityLog extends AppCompatActivity {
 
         setContentView(R.layout.activity_exercise_log);
         database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "exercise").fallbackToDestructiveMigration().allowMainThreadQueries().build();
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        getUserLocation();
         createTestExercise();
         listView = findViewById(R.id.excerciseListView);
         getAllExerciseObjects();
@@ -62,7 +78,7 @@ public class ExcerciseActivityLog extends AppCompatActivity {
 
         public void createExercise(View v) {
 
-        // grabds text from edittext view
+        // grabs text from edittext view
         EditText UserInputExerciseName = findViewById(R.id.exercise_name);
         EditText userInputExerciseSets = findViewById(R.id.exercise_sets);
         EditText userInputExerciseReps = findViewById(R.id.exercise_reps);
@@ -70,9 +86,13 @@ public class ExcerciseActivityLog extends AppCompatActivity {
 
         // create Exercise object
         Exercise userInputExerciseObject = new Exercise(UserInputExerciseName.getText().toString(), Integer.parseInt(userInputExerciseSets.getText().toString()), Integer.parseInt(userInputExerciseReps.getText().toString()), userInputExerciseDescription.getText().toString(), currentTime.toString());
+        if(lastLocation != null){
+          userInputExerciseObject.longitude = lastLocation.getLongitude();
+          userInputExerciseObject.latitude = lastLocation.getLatitude();
+        }
 
         // add new exercise object to database
-        sendToServer(userInputExerciseObject.title, Integer.toString(userInputExerciseObject.sets), Integer.toString(userInputExerciseObject.reps), userInputExerciseObject.description, userInputExerciseObject.timestamp);
+        sendToServer(userInputExerciseObject.title, Integer.toString(userInputExerciseObject.sets), Integer.toString(userInputExerciseObject.reps), userInputExerciseObject.description, userInputExerciseObject.timestamp, Double.toString(userInputExerciseObject.longitude), Double.toString(userInputExerciseObject.latitude));
         database.excerciseDao().add(userInputExerciseObject);
 
         // clear edit field text
@@ -100,14 +120,16 @@ public class ExcerciseActivityLog extends AppCompatActivity {
                         List<Exercise> exerciseObjects = new ArrayList<>();
                         for (int i = 0; i < response.length(); i ++) {
                             try {
-                                Exercise exerciseObject = new Exercise();
-                                JSONObject jsonExercise =  response.getJSONObject(i);
+                              Exercise exerciseObject = new Exercise();
+                              JSONObject jsonExercise =  response.getJSONObject(i);
                               exerciseObject.title = jsonExercise.getString("title");
                               exerciseObject.sets = jsonExercise.getInt("sets");
                               exerciseObject.reps = jsonExercise.getInt("reps");
                               exerciseObject.description = jsonExercise.getString("description");
                               exerciseObject.timestamp = jsonExercise.getString("timestamp");
-                                exerciseObjects.add(exerciseObject);
+                              exerciseObject.longitude = jsonExercise.getDouble("longitude");
+                              exerciseObject.latitude = jsonExercise.getDouble("latitude");
+                              exerciseObjects.add(exerciseObject);
                             } catch (JSONException error) {
                                 error.printStackTrace();
                             }
@@ -123,7 +145,7 @@ public class ExcerciseActivityLog extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
-    private void sendToServer(final String title, final String sets, final String reps, final String description, final String timestamp) {
+    private void sendToServer(final String title, final String sets, final String reps, final String description, final String timestamp, final String longitude, final String latitude) {
 
         RequestQueue queue = Volley.newRequestQueue(this);
         String url ="https://young-temple-12802.herokuapp.com/exercises";
@@ -148,11 +170,53 @@ public class ExcerciseActivityLog extends AppCompatActivity {
             params.put("reps", reps);
             params.put("description", description);
             params.put("timestamp", timestamp);
+            params.put("longitude", longitude);
+            params.put("latitude", latitude);
             return params;
           }
         };
         queue.add(stringRequest);
     }
+
+  // Gets the users location
+  public void getUserLocation() {
+    if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+      ActivityCompat.requestPermissions(this,
+              new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+              PERMISSION_ID);
+    } else {
+      mFusedLocationClient.getLastLocation()
+              .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                  if (location != null) {
+                    Log.d("location", "Latitude is: " + location.getLatitude());
+                    Log.d("location", "Longitude is: " + location.getLongitude());
+                    lastLocation = location;
+                  } else {
+                    Log.i("Location", "Location Unknown");
+                  }
+                }
+              });
+    }
+  }
+
+  @Override
+  public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    switch (requestCode) {
+      case PERMISSION_ID: {
+        if (grantResults.length > 0
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+          getUserLocation();
+        } else {
+          // permission denied
+          latitude = "Unknown";
+          longitude = "Unknown";
+        }
+        return;
+      }
+    }
+  }
 
 
 }

@@ -26,21 +26,22 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_exercise_list_view, parent, false);
         }
 
-
-
-
         // Lookup view for data population
         TextView exerciseName = (TextView) convertView.findViewById(R.id.textViewName);
         TextView exerciseSets = (TextView) convertView.findViewById(R.id.textViewSets);
         TextView exerciseReps = (TextView) convertView.findViewById(R.id.textViewReps);
         TextView exerciseDescriptions = (TextView) convertView.findViewById(R.id.textViewDescription);
         TextView exerciseTimes = (TextView) convertView.findViewById(R.id.textViewTime);
+        TextView exerciseLongitude = (TextView) convertView.findViewById(R.id.textViewLongitude);
+        TextView exercuseLatitude = (TextView) convertView.findViewById(R.id.textViewLatitude);
         // Populate the data into the template view using the data object
         exerciseName.setText(exercise.title);
         exerciseSets.setText(exercise.sets);
         exerciseReps.setText(exercise.reps);
         exerciseDescriptions.setText(exercise.description);
         exerciseTimes.setText(exercise.timestamp);
+        exerciseLongitude.setText(Double.toString(exercise.longitude));
+        exerciseTimes.setText(Double.toString(exercise.latitude));
         // Return the completed view to render on screen
         return convertView;
     }
