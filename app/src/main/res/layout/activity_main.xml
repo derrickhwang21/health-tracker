@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_gravity="bottom"
-            android:text="Load Picture"/>
+            android:text="@string/load_picture"/>
 
         <Button
             android:id="@+id/button3"
@@ -46,7 +46,7 @@
             android:layout_gravity="bottom"
             android:layout_marginLeft="8dp"
             android:onClick="clickPictureActivity"
-            android:text="Take A Picture" />
+            android:text="@string/take_picture" />
     </LinearLayout>
 
     <LinearLayout
@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="clickWorkout"
-            android:text="Go to Workout"
+            android:text="@string/to_workout"
             android:gravity="center_vertical|center_horizontal"
             />
 
@@ -69,7 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="clickExcerciseLog"
-            android:text="Exercise Log"
+            android:text="@string/to_log"
             android:layout_marginLeft="22dp"
         android:gravity="center_vertical|center_horizontal" />
     </LinearLayout>

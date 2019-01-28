@@ -13,7 +13,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -29,7 +28,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static java.lang.Integer.parseInt;
 
 public class ExcerciseActivityLog extends AppCompatActivity {
     AppDatabase database;
@@ -99,7 +97,7 @@ public class ExcerciseActivityLog extends AppCompatActivity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        List<Exercise> exercises = new ArrayList<>();
+                        List<Exercise> exerciseObjects = new ArrayList<>();
                         for (int i = 0; i < response.length(); i ++) {
                             try {
                                 Exercise exerciseObject = new Exercise();
@@ -109,12 +107,12 @@ public class ExcerciseActivityLog extends AppCompatActivity {
                               exerciseObject.reps = jsonExercise.getInt("reps");
                               exerciseObject.description = jsonExercise.getString("description");
                               exerciseObject.timestamp = jsonExercise.getString("timestamp");
-                                exercises.add(exerciseObject);
+                                exerciseObjects.add(exerciseObject);
                             } catch (JSONException error) {
                                 error.printStackTrace();
                             }
                         }
-                        adapter.addAll(exercises);
+                        adapter.addAll(exerciseObjects);
                     }
                 }, new Response.ErrorListener() {
             @Override

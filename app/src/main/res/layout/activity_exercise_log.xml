@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="top"
-            android:hint="Exercise Name?"
+            android:hint="@string/hint_name"
             android:inputType="text"
             android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -29,7 +29,7 @@
             android:id="@+id/exercise_sets"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="How Many Sets?"
+            android:hint="@string/hint_sets"
             android:inputType="number"
             android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -43,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="top"
-            android:hint="How Many Reps?"
+            android:hint="@string/hint_reps"
             android:inputType="number"
             android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="top"
-            android:hint="Write Description"
+            android:hint="@string/hint_description"
             android:inputType="text"
             android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:onClick="createExercise"
-        android:text="Save" />
+        android:text="@string/save" />
     <ListView
         android:id="@+id/excerciseListView"
         android:layout_width="fill_parent"
