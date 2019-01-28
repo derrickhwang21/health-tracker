@@ -1,8 +1,11 @@
 # Codefellowship
 Building an Android health tracker app. The features are built out over the next several labs.
+
+## Back-End
+This repository features server work for the project: [Health-Tracker Android Backend](https://github.com/derrickhwang21/health-tracker-backend)
 ## Feature Task
 
-### lab 26 - Feature Tasks
+### Feature Tasks
 
 Finger Exercises          |  Stop Watch |  Inspiring Image Carousel
 :-------------------------:|:-------------------------: | :--------------------------------:
